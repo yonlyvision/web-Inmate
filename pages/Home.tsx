@@ -12,6 +12,9 @@ export const Home: React.FC = () => {
       <section className="relative bg-stone-100 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 flex flex-col md:flex-row items-center gap-12">
           <div className="md:w-1/2 space-y-6 z-10">
+            <p className="font-serif italic text-2xl text-stone-500 font-medium tracking-wide">
+              YOUR Life begins where fear ends
+            </p>
             <h1 className="font-serif text-5xl md:text-7xl font-bold text-stone-900 leading-tight">
               Stories that <br /> <span className="italic text-primary">touch the soul.</span>
             </h1>
