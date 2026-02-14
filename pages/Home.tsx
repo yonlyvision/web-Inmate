@@ -29,7 +29,7 @@ export const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black"></div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10 flex flex-col pt-48 lg:pt-64 pb-20">
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10 flex flex-col pt-32 lg:pt-48 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +40,7 @@ export const Home: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
-              className="inline-flex flex-col mb-16 border-l-2 border-primary pl-8"
+              className="inline-flex flex-col mb-12 border-l-2 border-primary pl-8"
             >
               <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-2">Perspective</span>
               <span className="text-lg font-serif italic text-white/40 tracking-widest lowercase">
@@ -57,7 +57,7 @@ export const Home: React.FC = () => {
               </span>
             </motion.div>
 
-            <h1 className="font-serif text-[12vw] lg:text-[10vw] font-black text-white leading-[0.85] tracking-tighter-extra mb-8">
+            <h1 className="font-serif text-[10vw] lg:text-[7vw] font-black text-white leading-[0.9] tracking-tighter-extra mb-8">
               Every Story <br />
               <span className="italic text-stone-500">Is A</span> <br />
               Homecoming.
