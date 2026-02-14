@@ -20,7 +20,7 @@ export const Lifestyle: React.FC = () => {
   return (
     <div className="bg-black min-h-screen font-sans text-white pb-48">
       {/* Editorial Hero */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 border-b border-white/5">
         <div className="absolute inset-0 z-0 scale-110">
           <img
             src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2000"

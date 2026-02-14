@@ -19,7 +19,7 @@ export const Connections: React.FC = () => {
   return (
     <div className="bg-black min-h-screen font-sans text-white pb-48">
       {/* Editorial Hero */}
-      <section className="relative h-[85vh] flex items-center overflow-hidden border-b border-white/5">
+      <section className="relative min-h-[85vh] flex items-center pt-32 pb-20 border-b border-white/5">
         <div className="absolute inset-0 z-0 scale-110">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-40"></div>
           <div className="absolute inset-0 bg-texture opacity-5"></div>
