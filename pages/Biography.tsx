@@ -55,12 +55,12 @@ export const Biography: React.FC = () => {
                     <motion.div {...fadeInUp} className="space-y-16">
                         <div className="space-y-8">
                             <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Philosophy</span>
-                            <h2 className="font-serif text-6xl font-black text-white leading-tight tracking-tighter">Why <br /><span className="italic text-stone-500">INM8TEBOOK?</span></h2>
+                            <h2 className="font-serif text-6xl font-black text-white leading-tight tracking-tighter">Why <br /><span className="italic text-stone-500">INM8TE BOOK?</span></h2>
                         </div>
 
                         <div className="space-y-10 text-xl text-stone-400 font-light italic leading-relaxed max-w-xl">
                             <p>
-                                The name <strong className="text-white not-italic font-black">INM8TEBOOK</strong> is more than just a play on words. It represents the shared human experience of feeling trapped—whether by our past, our circumstances, or our own limiting beliefs.
+                                The name <strong className="text-white not-italic font-black">INM8TE BOOK</strong> is more than just a play on words. It represents the shared human experience of feeling trapped—whether by our past, our circumstances, or our own limiting beliefs.
                             </p>
                             <p>
                                 But it also holds the promise of connection. An "inmate" is someone you share a space with. On this platform, we are all roommates on this planet, navigating the complexities of life together. It's a call to look beyond labels and find the human soul underneath.

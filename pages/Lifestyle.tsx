@@ -175,7 +175,7 @@ export const Lifestyle: React.FC = () => {
             "Eating is an <span className="italic text-stone-500 text-gradient">intelligent act</span>. When we nourish ourselves, we nourish the possibilities of our tomorrow."
           </blockquote>
           <div className="pt-12 border-t border-white/5 inline-block px-12">
-            <p className="text-[10px] font-black uppercase tracking-[0.8em] text-stone-600">The INM8TEBOOK Philosophy</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.8em] text-stone-600">The INM8TE BOOK Philosophy</p>
           </div>
         </div>
       </motion.section>
