@@ -22,14 +22,14 @@ export const Home: React.FC = () => {
     <div className="space-y-48 pb-48 bg-black">
 
       {/* Hero Section - The Masterpiece */}
-      <section className="relative h-[110vh] w-full flex items-center overflow-hidden">
+      <section className="relative h-[110vh] w-full flex items-start overflow-hidden">
         {/* The Animated Frame */}
         <div className="absolute inset-0 z-0">
           <HeroAnimation />
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black"></div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10 flex items-center pt-32 lg:pt-40 pb-20">
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10 flex flex-col pt-48 lg:pt-64 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
