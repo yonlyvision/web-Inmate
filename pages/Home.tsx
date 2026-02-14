@@ -29,7 +29,7 @@ export const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black"></div>
         </div>
 
-        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10">
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10 flex items-center pt-32 lg:pt-40 pb-20">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,10 +40,11 @@ export const Home: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
-              className="inline-flex flex-col mb-8 border-l-2 border-primary pl-8"
+              className="inline-flex flex-col mb-16 border-l-2 border-primary pl-8"
             >
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">
-                INM8TE <span className="text-white italic font-serif lowercase tracking-normal">book</span> Perspective
+              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary mb-2">Perspective</span>
+              <span className="text-lg font-serif italic text-white/40 tracking-widest lowercase">
+                inm8te <span className="text-primary px-1">book</span>
               </span>
             </motion.div>
 
