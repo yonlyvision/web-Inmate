@@ -42,8 +42,7 @@ export const Home: React.FC = () => {
               transition={{ duration: 0.8, delay: 1 }}
               className="inline-flex flex-col mb-8 border-l-2 border-primary pl-8"
             >
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">Inmate's Perspective</span>
-              <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-stone-600 mt-2 italic">Est. August 2026</span>
+              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">Inmate Book Perspective</span>
             </motion.div>
 
             <motion.div
@@ -63,7 +62,7 @@ export const Home: React.FC = () => {
 
             <div className="flex flex-col md:flex-row gap-12 items-start md:items-center">
               <p className="text-xl md:text-2xl text-stone-400 max-w-xl leading-relaxed font-light italic border-l border-white/10 pl-8">
-                Welcome to INM8TE—a high-end editorial space for the captured soul seeking connection and redemption.
+                Welcome to Inmate Book—a high-end editorial space for the captured soul seeking connection and redemption.
               </p>
 
               <div className="flex gap-8">

@@ -60,7 +60,7 @@ export const Biography: React.FC = () => {
 
                         <div className="space-y-10 text-xl text-stone-400 font-light italic leading-relaxed max-w-xl">
                             <p>
-                                The name <strong className="text-white not-italic font-black">INM8TE</strong> is more than just a play on words. It represents the shared human experience of feeling trapped—whether by our past, our circumstances, or our own limiting beliefs.
+                                The name <strong className="text-white not-italic font-black">Inmate Book</strong> is more than just a play on words. It represents the shared human experience of feeling trapped—whether by our past, our circumstances, or our own limiting beliefs.
                             </p>
                             <p>
                                 But it also holds the promise of connection. An "inmate" is someone you share a space with. On this platform, we are all roommates on this planet, navigating the complexities of life together. It's a call to look beyond labels and find the human soul underneath.

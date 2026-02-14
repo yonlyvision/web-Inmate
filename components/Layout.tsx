@@ -64,17 +64,17 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <Link
               to="/"
               className="font-serif text-3xl font-black tracking-tighter text-white flex items-center gap-3 group"
-              aria-label="INM8TE Home"
+              aria-label="Inmate Book Home"
             >
               <motion.span
                 whileHover={{ rotate: 15, scale: 1.1 }}
                 className="w-10 h-10 bg-primary text-white flex items-center justify-center rounded-full text-lg font-serif italic shadow-xl shadow-primary/20"
                 aria-hidden="true"
               >
-                8
+                B
               </motion.span>
               <Magnetic strength={0.2}>
-                <span className="group-hover:text-primary transition-colors tracking-widest text-lg uppercase font-black">INM8TE</span>
+                <span className="group-hover:text-primary transition-colors tracking-widest text-lg uppercase font-black">Inmate Book</span>
               </Magnetic>
             </Link>
 
@@ -170,7 +170,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="absolute top-0 left-0 w-full h-full bg-texture pointer-events-none"></div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-20 relative z-10">
           <div className="col-span-1 md:col-span-2">
-            <span className="font-serif text-4xl font-black text-white block mb-8 tracking-tighter">INM8TE<span className="text-primary italic">.</span></span>
+            <span className="font-serif text-4xl font-black text-white block mb-8 tracking-tighter">Inmate Book<span className="text-primary italic">.</span></span>
             <p className="mb-10 max-w-sm text-lg leading-relaxed font-light italic text-stone-400">
               "Every story is a homecoming." Exploring the depths of connection through words, film, and lifestyle.
             </p>
@@ -211,7 +211,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 mt-24 pt-10 border-t border-white/5 text-[10px] text-center font-black uppercase tracking-[0.5em] text-stone-700">
-          © {new Date().getFullYear()} INM8TE. Captured Souls, Seeking Freedom.
+          © {new Date().getFullYear()} Inmate Book. Captured Souls, Seeking Freedom.
         </div>
       </footer>
       <SubscribeModal
