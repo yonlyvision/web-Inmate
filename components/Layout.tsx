@@ -74,7 +74,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                 8
               </motion.span>
               <Magnetic strength={0.2}>
-                <span className="group-hover:text-primary transition-colors tracking-widest text-lg uppercase font-black">INM8TE BOOK</span>
+                <span className="group-hover:text-primary transition-colors tracking-widest text-lg uppercase font-black">
+                  INM8TE <span className="text-primary italic font-serif lowercase tracking-normal px-1">Book</span>
+                </span>
               </Magnetic>
             </Link>
 
@@ -170,7 +172,9 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
         <div className="absolute top-0 left-0 w-full h-full bg-texture pointer-events-none"></div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-20 relative z-10">
           <div className="col-span-1 md:col-span-2">
-            <span className="font-serif text-4xl font-black text-white block mb-8 tracking-tighter">INM8TE BOOK<span className="text-primary italic">.</span></span>
+            <span className="font-serif text-4xl font-black text-white block mb-8 tracking-tighter uppercase">
+              INM8TE <span className="text-primary italic lowercase px-1">book</span><span className="text-primary italic">.</span>
+            </span>
             <p className="mb-10 max-w-sm text-lg leading-relaxed font-light italic text-stone-400">
               "Every story is a homecoming." Exploring the depths of connection through words, film, and lifestyle.
             </p>
@@ -211,7 +215,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
           </div>
         </div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 mt-24 pt-10 border-t border-white/5 text-[10px] text-center font-black uppercase tracking-[0.5em] text-stone-700">
-          © {new Date().getFullYear()} INM8TE BOOK. Captured Souls, Seeking Freedom.
+          © {new Date().getFullYear()} INM8TE BOOK. All Rights Reserved.
         </div>
       </footer>
       <SubscribeModal
