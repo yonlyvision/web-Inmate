@@ -40,10 +40,19 @@ export const Home: React.FC = () => {
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1 }}
-              className="inline-flex items-center gap-6 mb-8 border-l-2 border-primary pl-8"
+              className="inline-flex flex-col mb-8 border-l-2 border-primary pl-8"
             >
-              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">Inmate Number 08-26</span>
-              <div className="h-[1px] w-20 bg-primary/20"></div>
+              <span className="text-[10px] font-black uppercase tracking-[0.6em] text-primary">Inmate's Perspective</span>
+              <span className="text-[8px] font-bold uppercase tracking-[0.4em] text-stone-600 mt-2 italic">Est. August 2026</span>
+            </motion.div>
+
+            <motion.div
+              variants={fadeInUp}
+              className="mb-6"
+            >
+              <span className="font-serif italic text-xl md:text-2xl text-stone-500 tracking-wide">
+                "Your life begins where fear ends."
+              </span>
             </motion.div>
 
             <h1 className="font-serif text-[12vw] lg:text-[10vw] font-black text-white leading-[0.85] tracking-tighter-extra mb-8">
