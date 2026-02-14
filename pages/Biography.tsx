@@ -1,126 +1,159 @@
 import React from 'react';
 import { BookOpen, User, Calendar, Star } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Magnetic from '../components/Magnetic';
+
+const fadeInUp = {
+    initial: { opacity: 0, y: 20 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true },
+    transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }
+};
+
+const staggerContainer = {
+    initial: {},
+    whileInView: { transition: { staggerChildren: 0.15 } }
+};
 
 export const Biography: React.FC = () => {
     return (
-        <div className="bg-stone-50 min-h-screen font-sans text-stone-800">
+        <div className="bg-black min-h-screen font-sans text-white pb-48">
 
-            {/* Hero Section */}
-            <section className="relative py-20 bg-stone-900 text-stone-100 overflow-hidden">
-                <div className="absolute inset-0 opacity-20">
-                    <img src="https://picsum.photos/1920/1080?grayscale&blur=2" alt="Background Texture" className="w-full h-full object-cover" />
+            {/* Editorial Hero */}
+            <section className="relative h-[80vh] flex items-center overflow-hidden border-b border-white/5">
+                <div className="absolute inset-0 z-0 scale-110">
+                    <img
+                        src="https://images.unsplash.com/photo-1507679799987-c73774471bd9?auto=format&fit=crop&q=80&w=2000"
+                        alt="Noir Background"
+                        className="w-full h-full object-cover grayscale opacity-30 mix-blend-luminosity brightness-50"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
                 </div>
-                <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
-                    <h1 className="font-serif text-5xl md:text-6xl font-bold mb-6">The Story Behind the Story</h1>
-                    <p className="text-xl text-stone-300 max-w-2xl mx-auto leading-relaxed">
-                        "We are all inmates of our own minds until we find the key to set ourselves free."
-                    </p>
+
+                <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10">
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any }}
+                        className="max-w-4xl"
+                    >
+                        <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary mb-12 block">The Origin Story</span>
+                        <h1 className="font-serif text-[8vw] lg:text-[6vw] font-black mb-12 leading-[0.9] tracking-tighter-extra">
+                            Beauty in the <br />
+                            <span className="italic text-stone-500">Broken Pieces.</span>
+                        </h1>
+                        <p className="text-2xl md:text-3xl text-stone-400 max-w-2xl leading-relaxed font-light italic opacity-80 border-l border-white/10 pl-12">
+                            "We are all inmates of our own minds until we find the key to set ourselves free."
+                        </p>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* The Meaning: INM8TE */}
-            <section className="py-24 px-4 max-w-7xl mx-auto">
-                <div className="grid md:grid-cols-2 gap-16 items-center">
-                    <div>
-                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-200 rounded-full text-stone-700 text-sm font-bold tracking-wider uppercase mb-6">
-                            <Star size={16} className="text-primary" />
-                            <span>The Philosophy</span>
+            {/* The Definition */}
+            <section className="py-48 max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20">
+                <div className="grid lg:grid-cols-2 gap-32 items-center">
+                    <motion.div {...fadeInUp} className="space-y-16">
+                        <div className="space-y-8">
+                            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Philosophy</span>
+                            <h2 className="font-serif text-6xl font-black text-white leading-tight tracking-tighter">Why <br /><span className="italic text-stone-500">INM8TE?</span></h2>
                         </div>
-                        <h2 className="font-serif text-4xl font-bold text-stone-900 mb-6">Why "INM8TE"?</h2>
-                        <p className="text-lg text-stone-600 mb-6 leading-relaxed">
-                            The name <strong>INM8TE</strong> is more than just a play on words. It represents the shared human experience of feeling trapped—whether by our past, our circumstances, or our own limiting beliefs.
-                        </p>
-                        <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-                            But it also holds the promise of connection. An "inmate" is someone you share a space with. On this platform, we are all roommates on this planet, navigating the complexities of life together. It's a call to look beyond labels and find the human soul underneath.
-                        </p>
-                    </div>
-                    <div className="bg-stone-200 h-[500px] rounded-2xl overflow-hidden shadow-xl relative">
-                        <img src="https://picsum.photos/600/800?random=20" alt="Abstract connection" className="w-full h-full object-cover" />
-                        <div className="absolute inset-0 bg-stone-900/10"></div>
-                    </div>
+
+                        <div className="space-y-10 text-xl text-stone-400 font-light italic leading-relaxed max-w-xl">
+                            <p>
+                                The name <strong className="text-white not-italic font-black">INM8TE</strong> is more than just a play on words. It represents the shared human experience of feeling trapped—whether by our past, our circumstances, or our own limiting beliefs.
+                            </p>
+                            <p>
+                                But it also holds the promise of connection. An "inmate" is someone you share a space with. On this platform, we are all roommates on this planet, navigating the complexities of life together. It's a call to look beyond labels and find the human soul underneath.
+                            </p>
+                        </div>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.5 }}
+                        className="relative group aspect-[3/4] overflow-hidden rounded-[4rem] border border-white/5"
+                    >
+                        <img src="https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?auto=format&fit=crop&q=80&w=1500" alt="Abstract connection" className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000" />
+                        <div className="absolute inset-0 bg-gradient-to-tr from-black via-transparent to-transparent opacity-60"></div>
+
+                        <div className="absolute bottom-12 left-12">
+                            <div className="glass p-10 rounded-3xl max-w-xs">
+                                <p className="text-white font-serif italic text-lg pb-4 border-b border-white/10">"Bound by walls, freed by words."</p>
+                                <span className="text-[8px] font-black uppercase tracking-[0.4em] text-stone-500 mt-4 block">Manifesto 01</span>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* The Background: Author's Story */}
-            <section className="py-24 bg-white">
-                <div className="max-w-5xl mx-auto px-4">
-                    <div className="text-center mb-16">
-                        <User size={48} className="mx-auto text-stone-400 mb-4" />
-                        <h2 className="font-serif text-4xl font-bold text-stone-900 mb-6">About the Author</h2>
-                        <div className="h-1 w-20 bg-primary mx-auto"></div>
-                    </div>
+            {/* The Soul: Narrative */}
+            <section className="bg-stone-950 py-48 relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-full h-full bg-texture opacity-5"></div>
+                <div className="max-w-4xl mx-auto px-6 relative z-10 text-center space-y-24">
+                    <motion.div {...fadeInUp} className="space-y-6">
+                        <User size={48} className="mx-auto text-primary opacity-50 mb-8" />
+                        <h2 className="font-serif text-6xl font-black text-white tracking-tighter">The <span className="italic text-stone-500">Author.</span></h2>
+                        <div className="h-[2px] w-20 bg-primary mx-auto"></div>
+                    </motion.div>
 
-                    <div className="prose prose-lg mx-auto text-stone-600">
-                        <p>
+                    <motion.div variants={staggerContainer} initial="initial" whileInView="whiteInView" className="space-y-16 text-2xl text-stone-400 font-light italic leading-relaxed text-left">
+                        <motion.p variants={fadeInUp}>
                             Every story has a beginning, and mine started in a place most people try to forget. My journey hasn't been a straight line; it's been a winding road of mistakes, consequences, and ultimately, redemption.
-                        </p>
-                        <p>
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
                             Writing became my escape and my salvation. In the quietest moments, I found my loudest voice. I realized that my experiences, however painful, gave me a unique perspective on resilience, hope, and the power of second chances.
-                        </p>
-                        <p>
-                            I founded this platform to share those stories—not just mine, but the stories of everyone who is fighting to rebuild, to grow, and to be seen for who they are today, not who they were yesterday.
-                        </p>
-                        <blockquote className="font-serif italic text-2xl text-stone-800 border-l-4 border-primary pl-6 my-10">
+                        </motion.p>
+
+                        <motion.blockquote variants={fadeInUp} className="font-serif italic text-4xl lg:text-5xl text-white border-l-4 border-primary pl-12 my-24 py-4 leading-tight">
                             "I believe that our worst moments do not define us. It is what we do after the fall that truly matters."
-                        </blockquote>
-                    </div>
+                        </motion.blockquote>
+
+                        <motion.p variants={fadeInUp}>
+                            I founded this platform to share those stories—not just mine, but the stories of everyone who is fighting to rebuild, to grow, and to be seen for who they are today, not who they were yesterday.
+                        </motion.p>
+                    </motion.div>
                 </div>
             </section>
 
-            {/* What's Coming Up */}
-            <section className="py-24 px-4 bg-stone-100">
-                <div className="max-w-6xl mx-auto">
-                    <div className="flex flex-col md:flex-row justify-between items-end mb-12">
-                        <div>
-                            <h2 className="font-serif text-4xl font-bold text-stone-900 mb-4">What's Next?</h2>
-                            <p className="text-stone-600 text-lg">The journey is just beginning. Here is what is on the horizon.</p>
-                        </div>
-                        <BookOpen className="text-stone-300 hidden md:block" size={64} />
+            {/* Upcoming: Editorial Timeline */}
+            <section className="py-48 max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 relative">
+                <div className="flex flex-col lg:flex-row justify-between items-end mb-32 gap-12">
+                    <div className="max-w-2xl">
+                        <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary mb-6 block">Editorial Roadmap</span>
+                        <h2 className="font-serif text-6xl lg:text-8xl font-black text-white leading-tight tracking-tighter">
+                            The <br /><span className="italic text-stone-500">Horizon.</span>
+                        </h2>
                     </div>
+                    <BookOpen className="text-white/5 hidden lg:block" size={150} />
+                </div>
 
-                    <div className="grid md:grid-cols-3 gap-8">
-                        {/* Event 1 */}
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-stone-200">
-                            <div className="text-primary font-bold text-sm uppercase tracking-wider mb-2">Book Launch</div>
-                            <h3 className="font-serif text-2xl font-bold text-stone-900 mb-4">The Quiet Between Words</h3>
-                            <p className="text-stone-600 mb-6">
-                                The official release of my memoir. Join us for a virtual reading and Q&A session.
-                            </p>
-                            <div className="flex items-center gap-2 text-stone-500 text-sm">
-                                <Calendar size={16} />
-                                <span>Fall 2026</span>
+                <div className="grid lg:grid-cols-3 gap-12">
+                    {[
+                        { title: "The Quiet Between Words", sub: "Book Launch", date: "Fall 2026", desc: "The official release of my memoir. Join us for a virtual reading and Q&A session." },
+                        { title: "The Connections App", sub: "Digital Platform", date: "Late 2026", desc: "Beta testing for our safe, dignity-first dating and connection platform begins soon." },
+                        { title: "Season Four: Rebuilding", sub: "Podcast Series", date: "Coming Soon", desc: "Season 4 features interviews with thought leaders on justice, art, and radical reform." }
+                    ].map((event, idx) => (
+                        <motion.div
+                            key={idx}
+                            initial={{ opacity: 0, y: 30 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.6, delay: idx * 0.1 }}
+                            className="glass p-12 rounded-[3rem] space-y-10 group hover:border-primary/30 transition-all duration-700"
+                        >
+                            <div className="space-y-4">
+                                <span className="text-primary font-black text-[10px] uppercase tracking-[0.4em]">{event.sub}</span>
+                                <h3 className="font-serif text-4xl font-bold text-white group-hover:text-primary transition-colors">{event.title}</h3>
                             </div>
-                        </div>
-
-                        {/* Event 2 */}
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-stone-200">
-                            <div className="text-primary font-bold text-sm uppercase tracking-wider mb-2">Community</div>
-                            <h3 className="font-serif text-2xl font-bold text-stone-900 mb-4">The Connections App</h3>
-                            <p className="text-stone-600 mb-6">
-                                Beta testing for our safe, dignity-first dating and connection platform begins soon.
-                            </p>
-                            <div className="flex items-center gap-2 text-stone-500 text-sm">
-                                <Calendar size={16} />
-                                <span>Late 2026</span>
+                            <p className="text-stone-500 font-light italic leading-relaxed text-lg">{event.desc}</p>
+                            <div className="pt-6 flex items-center gap-4 border-t border-white/5">
+                                <Calendar size={18} className="text-stone-700" />
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-600">{event.date}</span>
                             </div>
-                        </div>
-
-                        {/* Event 3 */}
-                        <div className="bg-white p-8 rounded-xl shadow-sm border border-stone-200">
-                            <div className="text-primary font-bold text-sm uppercase tracking-wider mb-2">Podcast</div>
-                            <h3 className="font-serif text-2xl font-bold text-stone-900 mb-4">New Season</h3>
-                            <p className="text-stone-600 mb-6">
-                                Season 4: "Rebuilding" features interviews with thought leaders on justice and reform.
-                            </p>
-                            <div className="flex items-center gap-2 text-stone-500 text-sm">
-                                <Calendar size={16} />
-                                <span>Coming Soon</span>
-                            </div>
-                        </div>
-                    </div>
+                        </motion.div>
+                    ))}
                 </div>
             </section>
-
         </div>
     );
 };

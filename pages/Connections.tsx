@@ -1,208 +1,182 @@
 import React from 'react';
-import { Sprout, ShieldCheck, HeartHandshake, Scale, Users, Sun } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Heart, Shield, Sparkles, Send, Users, Target, Zap } from 'lucide-react';
+import Magnetic from '../components/Magnetic';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: { transition: { staggerChildren: 0.2 } }
+};
 
 export const Connections: React.FC = () => {
   return (
-    <div className="bg-stone-50 min-h-screen font-sans text-stone-800">
-      
-      {/* Hero Section: Mission Driven */}
-      <section className="relative pt-32 pb-24 px-4 overflow-hidden bg-white">
-        <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-            <img src="https://picsum.photos/1920/1080?grayscale&blur=2" alt="Background Texture" className="w-full h-full object-cover" />
+    <div className="bg-black min-h-screen font-sans text-white pb-48">
+      {/* Editorial Hero */}
+      <section className="relative h-[85vh] flex items-center overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 z-0 scale-110">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-40"></div>
+          <div className="absolute inset-0 bg-texture opacity-5"></div>
         </div>
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-stone-100 rounded-full text-stone-600 text-sm font-bold tracking-wider uppercase mb-8 border border-stone-200">
-            <Sun size={16} className="text-primary" />
-            <span>Project: Second Chance</span>
+
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any }}
+            className="text-center max-w-5xl mx-auto space-y-12"
+          >
+            <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary block">The Social Editorial</span>
+            <h1 className="font-serif text-[8vw] lg:text-[7vw] font-black mb-8 leading-[0.9] tracking-tighter-extra">
+              Love beyond <br /><span className="italic text-stone-500">labels.</span>
+            </h1>
+            <p className="text-2xl md:text-3xl text-stone-400 font-light italic leading-relaxed max-w-3xl mx-auto border-y border-white/5 py-12">
+              A premium, secure ecosystem designed for the captured soul seeking connection and redemption.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* The Vision: Gallery Layout */}
+      <section className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 py-48">
+        <div className="grid lg:grid-cols-12 gap-24 items-center">
+          <div className="lg:col-span-7 space-y-16">
+            <motion.div {...fadeInUp} className="space-y-8">
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">The Mission</span>
+              <h2 className="font-serif text-6xl lg:text-8xl font-black text-white leading-tight tracking-tighter">
+                Redefining <br /><span className="italic text-stone-500">Redemption.</span>
+              </h2>
+            </motion.div>
+
+            <p className="text-2xl text-stone-400 leading-relaxed font-light italic border-l border-white/10 pl-12 max-w-2xl">
+              We believe that one's past should not permanently dictate their future capacity for love and contribution. The Connections Project is building the first specialized platform for the justice-impacted community.
+            </p>
+
+            <div className="grid sm:grid-cols-2 gap-12 pt-12">
+              {[
+                { icon: <Heart size={24} />, title: "Soul-First Dating", desc: "Curated matching based on deep values and future aspirations." },
+                { icon: <Target size={24} />, title: "Career Re-entry", desc: "Connecting motivated talent with inclusive employers." }
+              ].map((item, idx) => (
+                <motion.div key={idx} {...fadeInUp} className="space-y-6 group">
+                  <div className="w-16 h-16 rounded-3xl glass flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    {item.icon}
+                  </div>
+                  <h4 className="font-serif text-2xl font-bold text-white group-hover:text-primary transition-colors">{item.title}</h4>
+                  <p className="text-stone-500 font-light italic leading-relaxed">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
-          
-          <h1 className="font-serif text-5xl md:text-7xl font-bold text-stone-900 mb-8 leading-tight">
-            Love beyond <br/><span className="italic text-stone-500">labels.</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-stone-600 max-w-2xl mx-auto mb-12 leading-relaxed font-light">
-            A dignified connection platform for those rebuilding their lives after incarceration, and the people who believe in their future.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-             <a href="#waitlist" className="px-8 py-4 bg-stone-900 text-white rounded-full font-medium hover:bg-primary transition-colors shadow-lg">
-                Join the Waitlist
-             </a>
-             <a href="#mission" className="px-8 py-4 bg-white text-stone-900 border border-stone-200 rounded-full font-medium hover:bg-stone-50 transition-colors">
-                Read Our Mission
-             </a>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2 }}
+            className="lg:col-span-5 relative group"
+          >
+            <div className="aspect-[4/6] overflow-hidden rounded-[4rem] border border-white/5">
+              <img
+                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=1000"
+                alt="Community Connection"
+                className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80"></div>
+            </div>
+            {/* Overlay Badge */}
+            <div className="absolute -bottom-10 -left-10 glass p-10 rounded-[3rem] max-w-xs shadow-2xl">
+              <Users size={32} className="text-primary mb-4" />
+              <p className="text-white font-serif italic text-lg leading-snug">"Honesty is the only path to true connection."</p>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Pillars Section: Dark Room Grid */}
+      <section className="bg-stone-950 py-48 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-texture opacity-5"></div>
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+          <motion.div {...fadeInUp} className="text-center mb-32 space-y-8">
+            <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary">Core Values</span>
+            <h2 className="font-serif text-6xl lg:text-8xl font-black text-white leading-tight tracking-tighter">Foundational <span className="italic text-stone-500">Pillars.</span></h2>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-3 gap-12">
+            {[
+              { icon: <Sparkles size={32} />, title: "Growth-Centric", desc: "Not just a dating app, but a platform for personal development, providing resources for mental health and professional growth." },
+              { icon: <Send size={32} />, title: "Honest Intentions", desc: "A community built on radical transparency and the shared understanding that honesty is the only path to true connection." },
+              { icon: <Shield size={32} />, title: "Safety & Trust", desc: "Industry-leading security protocols and community moderation to ensure a safe environment for all members." }
+            ].map((pillar, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: idx * 0.1 }}
+                className="glass p-16 rounded-[4rem] group hover:border-primary transition-all duration-1000"
+              >
+                <div className="w-20 h-20 rounded-[2rem] bg-stone-900 border border-white/5 flex items-center justify-center text-primary mb-12 group-hover:bg-primary group-hover:text-white transition-all duration-700">
+                  {pillar.icon}
+                </div>
+                <h3 className="font-serif text-3xl font-bold text-white mb-6 group-hover:text-primary transition-colors">{pillar.title}</h3>
+                <p className="text-stone-400 font-light italic leading-relaxed text-lg">{pillar.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Why This Exists: The Problem */}
-      <section id="mission" className="py-24 bg-stone-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <div>
-               <h2 className="font-serif text-4xl font-bold text-stone-900 mb-6">The invisible sentence of isolation.</h2>
-               <p className="text-lg text-stone-600 mb-6 leading-relaxed">
-                 For millions of people re-entering society, the sentence often continues long after release. Stigma creates barriers not just to housing and employment, but to human connection.
-               </p>
-               <p className="text-lg text-stone-600 mb-8 leading-relaxed">
-                 Traditional dating apps reduce complex human stories to checkboxes. In that world, a past mistake often means immediate rejection, regardless of the work done to rebuild, grow, and atone.
-               </p>
-               <div className="border-l-4 border-primary pl-6 py-2">
-                 <p className="font-serif italic text-xl text-stone-800">
-                   "We isolate people who need community the most. It's time to change the narrative from exclusion to restoration."
-                 </p>
-               </div>
-            </div>
-            <div className="relative">
-               <div className="absolute -inset-4 bg-stone-200 rounded-2xl -z-10 rotate-3"></div>
-               <img 
-                 src="https://picsum.photos/600/800?grayscale" 
-                 alt=" contemplative person looking forward" 
-                 className="rounded-xl shadow-xl w-full object-cover h-[500px]"
-               />
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Waitlist: Editorial CTA */}
+      <motion.section
+        {...fadeInUp}
+        className="max-w-6xl mx-auto px-6 py-48 text-center relative"
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] bg-primary/2 rounded-full blur-[180px] -z-10"></div>
 
-      {/* The Vision: Pillars */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-20">
-            <h2 className="font-serif text-4xl font-bold text-stone-900 mb-6">A platform built on dignity.</h2>
-            <p className="text-stone-600 text-lg">
-              We are building a space where honesty is valued over perfection, and where the future matters more than the past.
+        <div className="glass p-24 rounded-[5rem] space-y-16 relative overflow-hidden">
+          <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
+
+          <div className="space-y-12 max-w-3xl mx-auto">
+            <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Private Access</span>
+            <h2 className="font-serif text-6xl lg:text-7xl font-black text-white leading-[0.9] tracking-tighter">Become a <br /><span className="italic text-stone-500">Founder-Member.</span></h2>
+            <p className="text-2xl text-stone-400 font-light italic leading-relaxed">
+              We are hand-selecting our first 500 members to shape the future of this community. Secure your spot on the waitlist.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-12">
-            <div className="bg-stone-50 p-8 rounded-2xl border border-stone-100">
-              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm text-stone-700">
-                <Sprout size={28} />
-              </div>
-              <h3 className="font-serif text-2xl font-bold text-stone-900 mb-4">Growth-Centric</h3>
-              <p className="text-stone-600 leading-relaxed">
-                Profiles that highlight rehabilitation, education, and personal development. Show who you are becoming, not just where you have been.
-              </p>
-            </div>
-            
-            <div className="bg-stone-50 p-8 rounded-2xl border border-stone-100">
-              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm text-stone-700">
-                <HeartHandshake size={28} />
-              </div>
-              <h3 className="font-serif text-2xl font-bold text-stone-900 mb-4">Honest Intentions</h3>
-              <p className="text-stone-600 leading-relaxed">
-                A community for serious relationships. We foster an environment of radical honesty where disclosure is handled with respect and timing.
-              </p>
-            </div>
+          <form className="relative max-w-2xl mx-auto group">
+            <input
+              type="email"
+              placeholder="Your digital identifier (email)"
+              className="w-full px-12 py-8 rounded-full border border-white/10 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/50 backdrop-blur-3xl text-white placeholder:text-stone-700 transition-all font-light italic text-lg"
+            />
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 px-12 py-5 bg-white text-black rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all shadow-2xl"
+            >
+              Request Entry
+            </motion.button>
+          </form>
 
-            <div className="bg-stone-50 p-8 rounded-2xl border border-stone-100">
-              <div className="w-14 h-14 bg-white rounded-full flex items-center justify-center mb-6 shadow-sm text-stone-700">
-                <ShieldCheck size={28} />
-              </div>
-              <h3 className="font-serif text-2xl font-bold text-stone-900 mb-4">Safety & Trust</h3>
-              <p className="text-stone-600 leading-relaxed">
-                Verification processes that protect everyone. We balance the need for safety with the right to privacy and a fresh start.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Who It's For */}
-      <section className="py-24 bg-stone-900 text-stone-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="text-center mb-16">
-             <h2 className="font-serif text-4xl font-bold text-white mb-4">Who is this community for?</h2>
-             <div className="h-1 w-20 bg-primary mx-auto"></div>
-           </div>
-
-           <div className="grid md:grid-cols-2 gap-12">
-             <div className="bg-stone-800/50 p-10 rounded-2xl border border-stone-700">
-                <div className="flex items-center gap-4 mb-6">
-                   <Users className="text-primary" size={32} />
-                   <h3 className="font-serif text-2xl font-bold text-white">The Rebuilders</h3>
-                </div>
-                <ul className="space-y-4 text-stone-300">
-                   <li className="flex gap-3">
-                     <span className="text-primary">•</span>
-                     <span>Individuals with a past conviction who are actively rebuilding their lives.</span>
-                   </li>
-                   <li className="flex gap-3">
-                     <span className="text-primary">•</span>
-                     <span>People who value honesty and are tired of hiding their story.</span>
-                   </li>
-                   <li className="flex gap-3">
-                     <span className="text-primary">•</span>
-                     <span>Those seeking a partner who understands resilience and redemption.</span>
-                   </li>
-                </ul>
-             </div>
-
-             <div className="bg-stone-800/50 p-10 rounded-2xl border border-stone-700">
-                <div className="flex items-center gap-4 mb-6">
-                   <Scale className="text-primary" size={32} />
-                   <h3 className="font-serif text-2xl font-bold text-white">The Open-Hearted</h3>
-                </div>
-                <ul className="space-y-4 text-stone-300">
-                   <li className="flex gap-3">
-                     <span className="text-primary">•</span>
-                     <span>People who believe a person is more than their worst mistake.</span>
-                   </li>
-                   <li className="flex gap-3">
-                     <span className="text-primary">•</span>
-                     <span>Individuals seeking depth, gratitude, and loyalty in a partner.</span>
-                   </li>
-                   <li className="flex gap-3">
-                     <span className="text-primary">•</span>
-                     <span>Those who value shared values over superficial status.</span>
-                   </li>
-                </ul>
-             </div>
-           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section id="waitlist" className="py-24 px-4 bg-primary/5">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-serif text-4xl md:text-5xl font-bold text-stone-900 mb-6">Be part of the solution.</h2>
-          <p className="text-xl text-stone-600 mb-10 leading-relaxed">
-            We are currently in the research and development phase. Join the waitlist to receive updates, share your thoughts, and be the first to know when we launch.
-          </p>
-          
-          <div className="bg-white p-8 rounded-2xl shadow-xl border border-stone-100">
-            <form className="flex flex-col gap-4">
-              <div className="text-left">
-                <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">Email Address</label>
-                <input 
-                  type="email" 
-                  placeholder="name@example.com" 
-                  className="w-full px-4 py-3 rounded-lg bg-stone-50 border border-stone-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
-                />
-              </div>
-              
-              <div className="text-left">
-                 <label className="block text-xs font-bold text-stone-500 uppercase tracking-wider mb-2">I am interested as...</label>
-                 <select className="w-full px-4 py-3 rounded-lg bg-stone-50 border border-stone-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all">
-                    <option>Select an option</option>
-                    <option>Someone seeking connection (Rebuilder)</option>
-                    <option>Someone open to connection (Supporter)</option>
-                    <option>Organization / Advocate</option>
-                 </select>
-              </div>
-
-              <button type="button" className="mt-4 w-full py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary-hover transition-colors shadow-md">
-                Join the Movement
-              </button>
-            </form>
-            <p className="mt-6 text-xs text-stone-400">
-              Your privacy is paramount. We will never share your data. This is a concept phase interest list only.
+          <div className="pt-12 border-t border-white/5 flex flex-col items-center gap-6">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-stone-600">
+              Join 1,200+ individuals awaiting connection
             </p>
+            <div className="flex -space-x-4">
+              {[1, 2, 3, 4, 5].map(i => (
+                <div key={i} className="w-12 h-12 rounded-full border-4 border-black bg-stone-800 overflow-hidden">
+                  <img src={`https://i.pravatar.cc/100?img=${i + 10}&grayscale`} alt="avatar" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 };

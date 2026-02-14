@@ -1,113 +1,184 @@
 import React from 'react';
-import { Clock, Tag, Leaf, Sun, Wind } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Coffee, Wind, Sun, Utensils, Heart, ChevronRight } from 'lucide-react';
 import { RECIPES } from '../constants';
+import Magnetic from '../components/Magnetic';
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }
+};
+
+const staggerContainer = {
+  initial: {},
+  whileInView: { transition: { staggerChildren: 0.15 } }
+};
 
 export const Lifestyle: React.FC = () => {
   return (
-    <div className="bg-stone-50 pb-20">
-      
-      {/* Intro Header */}
-      <section className="bg-white py-20 border-b border-stone-100">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <span className="text-primary font-bold tracking-widest uppercase text-xs mb-4 block">Philosophy</span>
-          <h1 className="font-serif text-5xl font-bold text-stone-900 mb-6">Nourish Body & Mind</h1>
-          <p className="text-xl text-stone-600 leading-relaxed">
-            True wellness isn't about restriction. It's about abundance, mindfulness, and the simple joy of eating something that makes you feel alive.
-          </p>
-          
-          <div className="flex justify-center gap-8 mt-12 text-stone-500">
-            <div className="flex flex-col items-center gap-2">
-              <Leaf className="text-green-700" size={24} />
-              <span className="text-xs uppercase tracking-wider">Plant Forward</span>
+    <div className="bg-black min-h-screen font-sans text-white pb-48">
+      {/* Editorial Hero */}
+      <section className="relative h-[80vh] flex items-center overflow-hidden border-b border-white/5">
+        <div className="absolute inset-0 z-0 scale-110">
+          <img
+            src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2000"
+            alt="Lifestyle Background"
+            className="w-full h-full object-cover grayscale opacity-30 mix-blend-luminosity brightness-50"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
+        </div>
+
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 w-full relative z-10 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any }}
+            className="max-w-5xl mx-auto space-y-12"
+          >
+            <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary block">The Wellness Editorial</span>
+            <h1 className="font-serif text-[8vw] lg:text-[7vw] font-black mb-8 leading-[0.9] tracking-tighter-extra">
+              Mindful <br /><span className="italic text-stone-500">Living.</span>
+            </h1>
+            <p className="text-2xl md:text-3xl text-stone-400 font-light italic leading-relaxed max-w-3xl mx-auto border-y border-white/5 py-12">
+              Cultivating wellness through plant-forward nutrition and daily rituals.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Routine: Editorial Standard */}
+      <section className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 py-48">
+        <div className="grid lg:grid-cols-2 gap-32 items-center">
+          <div className="space-y-16">
+            <motion.div {...fadeInUp} className="space-y-8">
+              <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Daily Rituals</span>
+              <h2 className="font-serif text-6xl lg:text-8xl font-black text-white leading-tight tracking-tighter">
+                The 5:00 AM <br /><span className="italic text-stone-500">Standard.</span>
+              </h2>
+            </motion.div>
+
+            <div className="space-y-12">
+              {[
+                { icon: <Wind size={24} />, title: "Morning Breathwork", desc: "10 minutes of box breathing to ground the mind and center the spirit." },
+                { icon: <Coffee size={24} />, title: "Ritual Coffee", desc: "Locally sourced, mindfully prepared, enjoyed in complete silence." }
+              ].map((item, idx) => (
+                <motion.div key={idx} {...fadeInUp} className="flex gap-10 group">
+                  <div className="w-20 h-20 rounded-3xl glass flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all duration-500">
+                    {item.icon}
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-serif text-2xl font-bold text-white group-hover:text-primary transition-colors">{item.title}</h4>
+                    <p className="text-stone-500 font-light italic leading-relaxed text-lg">{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
-            <div className="flex flex-col items-center gap-2">
-              <Sun className="text-amber-500" size={24} />
-              <span className="text-xs uppercase tracking-wider">Seasonal</span>
-            </div>
-            <div className="flex flex-col items-center gap-2">
-              <Wind className="text-blue-400" size={24} />
-              <span className="text-xs uppercase tracking-wider">Mindful</span>
-            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-10">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1 }}
+              className="aspect-[3/4] overflow-hidden rounded-[3rem] border border-white/5 group mt-24"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&q=80&w=800"
+                alt="Mindfulness"
+                className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+              />
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="aspect-[3/4] overflow-hidden rounded-[3rem] border border-white/5 group"
+            >
+              <img
+                src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&q=80&w=800"
+                alt="Coffee"
+                className="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+              />
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Featured Habits / Tips */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-                <h2 className="font-serif text-3xl font-bold text-stone-900 mb-6">The Morning Reset</h2>
-                <p className="text-stone-600 mb-6 leading-relaxed">
-                    How you start your morning dictates the flow of your entire day. My 15-minute routine focuses on hydration, movement, and silence before the digital noise begins.
-                </p>
-                <ul className="space-y-4 mb-8">
-                    <li className="flex items-center gap-3 text-stone-700">
-                        <span className="w-6 h-6 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xs font-bold">1</span>
-                        Glass of warm lemon water
-                    </li>
-                    <li className="flex items-center gap-3 text-stone-700">
-                        <span className="w-6 h-6 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xs font-bold">2</span>
-                        5 minutes of stretching
-                    </li>
-                    <li className="flex items-center gap-3 text-stone-700">
-                        <span className="w-6 h-6 rounded-full bg-sage-100 text-sage-800 flex items-center justify-center text-xs font-bold">3</span>
-                        Journaling three intentions
-                    </li>
-                </ul>
-                <button className="text-primary font-bold border-b-2 border-primary pb-1 hover:text-primary-hover">Read the full article</button>
-            </div>
-            <div className="order-1 md:order-2 h-[400px] overflow-hidden rounded-2xl shadow-lg">
-                <img src="https://picsum.photos/600/600?random=10" alt="Morning Routine" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-            </div>
+      {/* Recipes: Seasonal Archives */}
+      <section className="bg-stone-950 py-48 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-full h-full bg-texture opacity-5"></div>
+        <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
+          <motion.div {...fadeInUp} className="text-center mb-32 space-y-8">
+            <span className="text-[10px] font-black uppercase tracking-[0.8em] text-primary">Culinary Archives</span>
+            <h2 className="font-serif text-6xl lg:text-8xl font-black text-white leading-tight tracking-tighter">
+              Seasonal <span className="italic text-stone-500">Nourishment.</span>
+            </h2>
+          </motion.div>
+
+          <div className="grid lg:grid-cols-3 gap-12">
+            {RECIPES.map((recipe, idx) => (
+              <motion.div
+                key={recipe.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.1 }}
+                whileHover={{ y: -20 }}
+                className="glass rounded-[4rem] overflow-hidden group border border-white/5 hover:border-primary transition-all duration-1000"
+              >
+                <div className="aspect-[4/3] overflow-hidden relative">
+                  <img
+                    src={recipe.image}
+                    alt={recipe.title}
+                    className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000 brightness-75 group-hover:brightness-100"
+                  />
+                  <div className="absolute top-8 left-8">
+                    <span className="px-6 py-2 glass rounded-full text-[10px] font-black uppercase tracking-widest text-white shadow-2xl">
+                      {recipe.category}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-12 space-y-8">
+                  <h3 className="font-serif text-3xl font-bold text-white group-hover:text-primary transition-colors">{recipe.title}</h3>
+                  <p className="text-stone-500 font-light italic leading-relaxed text-lg">{recipe.description}</p>
+
+                  <div className="flex items-center justify-between pt-8 border-t border-white/5">
+                    <div className="flex items-center gap-3 text-stone-600">
+                      <Heart size={16} />
+                      <span className="text-[10px] font-black uppercase tracking-[0.2em]">{recipe.time}</span>
+                    </div>
+                    <Magnetic strength={0.3}>
+                      <button className="text-primary hover:scale-125 transition-all">
+                        <ChevronRight size={28} />
+                      </button>
+                    </Magnetic>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Recipes Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <h2 className="font-serif text-3xl font-bold text-stone-900 mb-10 text-center">Seasonal Recipes</h2>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {RECIPES.map((recipe) => (
-            <div key={recipe.id} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all group cursor-pointer border border-stone-100">
-              <div className="h-48 overflow-hidden relative">
-                <img src={recipe.image} alt={recipe.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                <div className="absolute top-4 left-4 bg-white/90 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide text-stone-800 backdrop-blur-sm">
-                  {recipe.category}
-                </div>
-              </div>
-              <div className="p-6">
-                <div className="flex items-center gap-2 text-stone-400 text-xs mb-3">
-                  <Clock size={14} />
-                  <span>{recipe.time}</span>
-                </div>
-                <h3 className="font-serif text-xl font-bold text-stone-900 mb-2 group-hover:text-primary transition-colors">{recipe.title}</h3>
-                <p className="text-stone-600 text-sm mb-4 line-clamp-2">
-                  {recipe.description}
-                </p>
-                <span className="text-primary text-sm font-bold flex items-center gap-1 group-hover:gap-2 transition-all">
-                  View Recipe <span className="text-lg">→</span>
-                </span>
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <div className="text-center mt-12">
-          <button className="px-8 py-3 border border-stone-300 rounded-full text-stone-600 font-medium hover:bg-stone-900 hover:text-white transition-all">
-            Load More Recipes
-          </button>
-        </div>
-      </section>
+      {/* Philosophy: Large Format Quote */}
+      <motion.section
+        {...fadeInUp}
+        className="max-w-6xl mx-auto px-6 py-48 text-center relative"
+      >
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] bg-primary/2 rounded-full blur-[180px] -z-10"></div>
 
-      {/* Quote */}
-      <section className="bg-sage-100 py-20 mt-12">
-         <div className="max-w-3xl mx-auto text-center px-4">
-            <h3 className="font-serif text-2xl md:text-4xl italic text-sage-800 leading-relaxed mb-6">
-              "To eat is a necessity, but to eat intelligently is an art."
-            </h3>
-            <p className="text-sage-800 font-bold uppercase tracking-widest text-sm">— François de La Rochefoucauld</p>
-         </div>
-      </section>
+        <div className="space-y-16">
+          <Utensils size={48} className="mx-auto text-primary opacity-50" />
+          <blockquote className="font-serif text-5xl md:text-7xl font-black text-white leading-[1.1] tracking-tighter max-w-5xl mx-auto">
+            "Eating is an <span className="italic text-stone-500 text-gradient">intelligent act</span>. When we nourish ourselves, we nourish the possibilities of our tomorrow."
+          </blockquote>
+          <div className="pt-12 border-t border-white/5 inline-block px-12">
+            <p className="text-[10px] font-black uppercase tracking-[0.8em] text-stone-600">The INM8TE Philosophy</p>
+          </div>
+        </div>
+      </motion.section>
     </div>
   );
 };
