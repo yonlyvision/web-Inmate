@@ -55,7 +55,7 @@ export const Biography: React.FC = () => {
                     <motion.div {...fadeInUp} className="space-y-16">
                         <div className="space-y-8">
                             <span className="text-[10px] font-black uppercase tracking-[0.5em] text-primary">Philosophy</span>
-                            <h2 className="font-serif text-6xl font-black text-white leading-tight tracking-tighter">Why <br /><span className="italic text-stone-500">INM8TE?</span></h2>
+                            <h2 className="font-serif text-6xl font-black text-white leading-tight tracking-tighter">Why <br /><span className="italic text-stone-500">Inmate Book?</span></h2>
                         </div>
 
                         <div className="space-y-10 text-xl text-stone-400 font-light italic leading-relaxed max-w-xl">
