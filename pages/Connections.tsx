@@ -213,7 +213,7 @@ export const Connections: React.FC = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your digital identifier (email)"
-                className="w-full px-12 py-8 rounded-full border border-white/10 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/50 backdrop-blur-3xl text-white placeholder:text-stone-700 transition-all font-light italic text-lg"
+                className="w-full px-12 py-8 rounded-full border border-white/20 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/80 backdrop-blur-3xl text-white placeholder:text-stone-500 transition-all font-light italic text-lg"
               />
               <motion.button
                 type="submit"
