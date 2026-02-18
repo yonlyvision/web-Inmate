@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Shield, Sparkles, Send, Users, Target, Zap } from 'lucide-react';
 import Magnetic from '../components/Magnetic';
 
@@ -18,18 +18,25 @@ const staggerContainer = {
 export const Connections: React.FC = () => {
   const [status, setStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const [email, setEmail] = React.useState('');
-  const [memberType, setMemberType] = React.useState<'rebuilder' | 'supporter' | 'organization' | 'advocate' | null>(null);
+  const [memberType, setMemberType] = React.useState<string | null>(null);
+  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+  const roles = [
+    { id: 'rebuilder', label: 'Seeking Connection', sub: 'Rebuilder' },
+    { id: 'supporter', label: 'Open to Connection', sub: 'Supporter' },
+    { id: 'org_advocate', label: 'Organization / Advocate', sub: 'Support Network' }
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!memberType) {
-      alert('Please select a member type first.');
+      alert('Please select your role first.');
       return;
     }
     setStatus('loading');
 
     try {
-      const res = await fetch('https://app.kit.com/forms/30fbdd215/subscriptions', {
+      const res = await fetch('https://app.convertkit.com/forms/30fbdd215/subscriptions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -186,45 +193,76 @@ export const Connections: React.FC = () => {
             </p>
           </div>
 
-          <div className="space-y-12">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto text-[10px] font-black uppercase tracking-[0.2em]">
-              {[
-                { id: 'rebuilder', label: 'Rebuilder', desc: 'Seeking Connection' },
-                { id: 'supporter', label: 'Supporter', desc: 'Open to Connection' },
-                { id: 'organization', label: 'Organization', desc: 'Resource Provider' },
-                { id: 'advocate', label: 'Advocate', desc: 'System Supporter' }
-              ].map((type) => (
-                <button
-                  key={type.id}
-                  onClick={() => setMemberType(type.id as any)}
-                  className={`p-6 rounded-3xl border transition-all text-center group relative overflow-hidden backdrop-blur-sm ${memberType === type.id
-                    ? 'bg-primary border-primary text-white shadow-2xl shadow-primary/20'
-                    : 'border-white/5 text-stone-500 hover:border-white/20 hover:text-white bg-white/[0.02]'
-                    }`}
-                >
-                  <span className="block mb-1">{type.label}</span>
-                  <span className="block text-[8px] opacity-40 font-light italic normal-case tracking-widest">{type.desc}</span>
-                </button>
-              ))}
+          <div className="space-y-12 max-w-2xl mx-auto">
+            {/* Custom Dropdown */}
+            <div className="relative z-50">
+              <button
+                type="button"
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full px-12 py-8 rounded-full border border-white/20 bg-stone-900/80 backdrop-blur-3xl text-left flex items-center justify-between group hover:border-primary/50 transition-all"
+              >
+                <div>
+                  <span className="block text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-1">Select Your Role</span>
+                  <span className={`text-xl font-serif italic ${memberType ? 'text-white' : 'text-stone-500'}`}>
+                    {memberType ? roles.find(r => r.id === memberType)?.label : 'How would you like to join?'}
+                  </span>
+                </div>
+                <div className={`transition-transform duration-500 text-stone-600 group-hover:text-primary ${isDropdownOpen ? 'rotate-180' : ''}`}>
+                  <Zap size={20} />
+                </div>
+              </button>
+
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -20, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 10, scale: 1 }}
+                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                    className="absolute top-full left-0 w-full bg-stone-900/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden mt-4"
+                  >
+                    <div className="p-4 space-y-2">
+                      {roles.map((role) => (
+                        <button
+                          key={role.id}
+                          onClick={() => {
+                            setMemberType(role.id);
+                            setIsDropdownOpen(false);
+                          }}
+                          className={`w-full p-8 rounded-2xl text-left transition-all group flex items-center justify-between ${memberType === role.id ? 'bg-primary text-white' : 'hover:bg-white/5 text-stone-400 hover:text-white'
+                            }`}
+                        >
+                          <div>
+                            <span className="block text-2xl font-serif italic mb-1">{role.label}</span>
+                            <span className={`text-[10px] font-black uppercase tracking-widest ${memberType === role.id ? 'text-white/60' : 'text-primary/60'}`}>
+                              {role.sub}
+                            </span>
+                          </div>
+                          {memberType === role.id && <Sparkles size={20} className="text-white animate-pulse" />}
+                        </button>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            <form onSubmit={handleSubmit} className="relative max-w-2xl mx-auto group">
+            <form onSubmit={handleSubmit} className="relative group">
               <input
                 required
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your digital identifier (email)"
-                className="w-full px-12 py-8 rounded-full border border-white/20 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/80 backdrop-blur-3xl text-white placeholder:text-stone-500 transition-all font-light italic text-lg"
+                placeholder="Submit your email for entry"
+                className="w-full px-12 py-8 rounded-full border border-white/20 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/80 backdrop-blur-3xl text-white placeholder:text-stone-600 transition-all font-light italic text-xl"
               />
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05, x: -5 }}
+                whileTap={{ scale: 0.95 }}
                 disabled={status === 'loading'}
-                className="absolute right-4 top-1/2 -translate-y-1/2 px-12 py-5 bg-white text-black rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all shadow-2xl disabled:opacity-50"
+                className="absolute right-4 top-1/2 -translate-y-1/2 px-14 py-5 bg-white text-black rounded-full font-black uppercase tracking-[0.2em] text-[10px] hover:bg-primary hover:text-white transition-all shadow-2xl disabled:opacity-50"
               >
-                {status === 'loading' ? 'Processing...' : status === 'success' ? 'Success!' : 'Request Entry'}
+                {status === 'loading' ? 'Encrypting...' : status === 'success' ? 'Confirmed' : 'Request Entry'}
               </motion.button>
             </form>
           </div>

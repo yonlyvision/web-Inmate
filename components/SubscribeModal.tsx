@@ -20,13 +20,12 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
         setStatus('loading');
 
         try {
-            const res = await fetch('https://app.kit.com/forms/30fbdd215/subscriptions', {
+            const res = await fetch('https://app.convertkit.com/forms/30fbdd215/subscriptions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email_address: formData.email,
-                    first_name: formData.name,
-                    fields: { member_type: formData.memberType }
+                    first_name: formData.name
                 })
             });
 
@@ -39,7 +38,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                 }, 3000);
             } else {
                 setStatus('idle');
-                alert('Subscription failed. Please try again.');
+                alert('Subscription failed. This can happen if the form ID is incorrect or Kit is blocking the request. Please try again later.');
             }
         } catch (err) {
             console.error(err);
