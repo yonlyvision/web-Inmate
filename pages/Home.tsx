@@ -22,7 +22,7 @@ export const Home: React.FC = () => {
     <div className="space-y-48 pb-48 bg-black">
 
       {/* Hero Section - The Masterpiece */}
-      <section className="relative min-h-[100vh] w-full flex items-center pt-32 lg:pt-40">
+      <section className="relative min-h-screen w-full flex items-center pt-32 lg:pt-40">
         {/* The Animated Frame */}
         <div className="absolute inset-0 z-0">
           <HeroAnimation />
@@ -170,7 +170,7 @@ export const Home: React.FC = () => {
       </section>
 
       {/* Podcast Section - Dark Room */}
-      <section id="podcast" className="bg-stone-950 py-48 relative overflow-hidden">
+      <section id="podcast" className="bg-stone-950 py-48 relative">
         <div className="absolute top-0 left-0 w-full h-full bg-texture opacity-5"></div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
           <div className="grid lg:grid-cols-12 gap-24 items-center">

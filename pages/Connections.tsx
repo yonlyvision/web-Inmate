@@ -19,7 +19,7 @@ export const Connections: React.FC = () => {
   return (
     <div className="bg-black min-h-screen font-sans text-white pb-48">
       {/* Editorial Hero */}
-      <section className="relative min-h-[85vh] flex items-center pt-32 pb-20 border-b border-white/5">
+      <section className="relative min-h-screen flex items-center pt-32 pb-20 border-b border-white/5">
         <div className="absolute inset-0 z-0 scale-110">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent opacity-40"></div>
           <div className="absolute inset-0 bg-texture opacity-5"></div>
@@ -98,7 +98,7 @@ export const Connections: React.FC = () => {
       </section>
 
       {/* Pillars Section: Dark Room Grid */}
-      <section className="bg-stone-950 py-48 relative overflow-hidden">
+      <section className="bg-stone-950 py-48 relative">
         <div className="absolute top-0 left-0 w-full h-full bg-texture opacity-5"></div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
           <motion.div {...fadeInUp} className="text-center mb-32 space-y-8">
@@ -137,7 +137,7 @@ export const Connections: React.FC = () => {
       >
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-[150%] bg-primary/2 rounded-full blur-[180px] -z-10"></div>
 
-        <div className="glass p-24 rounded-[5rem] space-y-16 relative overflow-hidden">
+        <div className="glass p-24 rounded-[5rem] space-y-16 relative">
           <div className="absolute -top-32 -right-32 w-96 h-96 bg-primary/10 blur-[120px] rounded-full pointer-events-none"></div>
 
           <div className="space-y-12 max-w-3xl mx-auto">

@@ -20,7 +20,7 @@ export const Lifestyle: React.FC = () => {
   return (
     <div className="bg-black min-h-screen font-sans text-white pb-48">
       {/* Editorial Hero */}
-      <section className="relative min-h-[90vh] flex items-center pt-32 pb-20 border-b border-white/5">
+      <section className="relative min-h-screen flex items-center pt-32 pb-20 border-b border-white/5">
         <div className="absolute inset-0 z-0 scale-110">
           <img
             src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&q=80&w=2000"
@@ -107,7 +107,7 @@ export const Lifestyle: React.FC = () => {
       </section>
 
       {/* Recipes: Seasonal Archives */}
-      <section className="bg-stone-950 py-48 relative overflow-hidden">
+      <section className="bg-stone-950 py-48 relative">
         <div className="absolute top-0 right-0 w-full h-full bg-texture opacity-5"></div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 relative z-10">
           <motion.div {...fadeInUp} className="text-center mb-32 space-y-8">

@@ -20,7 +20,7 @@ export const Biography: React.FC = () => {
         <div className="bg-black min-h-screen font-sans text-white pb-48">
 
             {/* Editorial Hero */}
-            <section className="relative min-h-[85vh] flex items-center pt-32 pb-20 border-b border-white/5">
+            <section className="relative min-h-screen flex items-center pt-32 pb-20 border-b border-white/5">
                 <div className="absolute inset-0 z-0 scale-110">
                     <img
                         src="https://images.unsplash.com/photo-1507679799987-c73774471bd9?auto=format&fit=crop&q=80&w=2000"
@@ -88,7 +88,7 @@ export const Biography: React.FC = () => {
             </section>
 
             {/* The Soul: Narrative */}
-            <section className="bg-stone-950 py-48 relative overflow-hidden">
+            <section className="bg-stone-950 py-48 relative">
                 <div className="absolute top-0 right-0 w-full h-full bg-texture opacity-5"></div>
                 <div className="max-w-4xl mx-auto px-6 relative z-10 text-center space-y-24">
                     <motion.div {...fadeInUp} className="space-y-6">

@@ -168,7 +168,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-black text-stone-500 py-24 border-t border-white/5 relative overflow-hidden">
+      <footer className="bg-black text-stone-500 py-24 border-t border-white/5 relative">
         <div className="absolute top-0 left-0 w-full h-full bg-texture pointer-events-none"></div>
         <div className="max-w-screen-2xl mx-auto px-6 sm:px-12 lg:px-20 grid grid-cols-1 md:grid-cols-4 gap-20 relative z-10">
           <div className="col-span-1 md:col-span-2">
