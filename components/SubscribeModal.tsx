@@ -79,7 +79,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                             </button>
                             <div className="space-y-2">
                                 <span className="text-primary font-bold uppercase text-xs tracking-widest">Stay Connected</span>
-                                <h3 className="font-serif text-3xl font-bold tracking-tight">Join the Inner Circle</h3>
+                                <h3 className="font-serif text-3xl font-bold tracking-tight">Subscribe to INM8TE</h3>
                             </div>
                         </div>
 
@@ -127,41 +127,6 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                                         />
                                     </div>
 
-                                    <div className="space-y-4">
-                                        <label className="text-xs font-black uppercase tracking-widest text-stone-400 flex items-center gap-2">
-                                            Member Type <span className="text-stone-300 font-normal italic">(Optional)</span>
-                                        </label>
-                                        <div className="grid grid-cols-2 gap-4">
-                                            <button
-                                                type="button"
-                                                onClick={() => setFormData({ ...formData, memberType: 'inmate' })}
-                                                className={`px-4 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${formData.memberType === 'inmate'
-                                                    ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
-                                                    : 'bg-stone-50 border-stone-200 text-stone-500 hover:border-primary/50'
-                                                    }`}
-                                            >
-                                                The Inmate
-                                            </button>
-                                            <button
-                                                type="button"
-                                                onClick={() => setFormData({ ...formData, memberType: 'client' })}
-                                                className={`px-4 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${formData.memberType === 'client'
-                                                    ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
-                                                    : 'bg-stone-50 border-stone-200 text-stone-500 hover:border-primary/50'
-                                                    }`}
-                                            >
-                                                The Client
-                                            </button>
-                                        </div>
-                                        <p className="text-[9px] text-stone-400 italic leading-relaxed">
-                                            {formData.memberType === 'inmate'
-                                                ? "Select this if you are seeking connection and would like to be part of the community list."
-                                                : formData.memberType === 'client'
-                                                    ? "Select this if you are looking to connect with and support those on the community list."
-                                                    : "Choosing a type helps us curate your experience, but you can leave this blank."}
-                                        </p>
-                                    </div>
-
                                     <motion.button
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
@@ -176,7 +141,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                                         ) : (
                                             <>
                                                 <Send size={18} />
-                                                Get Notified
+                                                Subscribe
                                             </>
                                         )}
                                     </motion.button>

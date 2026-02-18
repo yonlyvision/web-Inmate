@@ -18,7 +18,7 @@ const staggerContainer = {
 export const Connections: React.FC = () => {
   const [status, setStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const [email, setEmail] = React.useState('');
-  const [memberType, setMemberType] = React.useState<'inmate' | 'client' | null>(null);
+  const [memberType, setMemberType] = React.useState<'rebuilder' | 'supporter' | 'organization' | 'advocate' | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -187,21 +187,23 @@ export const Connections: React.FC = () => {
           </div>
 
           <div className="space-y-12">
-            <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl mx-auto text-[10px] font-black uppercase tracking-[0.2em]">
               {[
-                { id: 'inmate', label: 'The Inmate', desc: 'Seeking Connection' },
-                { id: 'client', label: 'The Client', desc: 'Seeking to Connect' }
+                { id: 'rebuilder', label: 'Rebuilder', desc: 'Seeking Connection' },
+                { id: 'supporter', label: 'Supporter', desc: 'Open to Connection' },
+                { id: 'organization', label: 'Organization', desc: 'Resource Provider' },
+                { id: 'advocate', label: 'Advocate', desc: 'System Supporter' }
               ].map((type) => (
                 <button
                   key={type.id}
                   onClick={() => setMemberType(type.id as any)}
-                  className={`p-6 rounded-[2rem] border transition-all text-center group relative overflow-hidden ${memberType === type.id
+                  className={`p-6 rounded-3xl border transition-all text-center group relative overflow-hidden backdrop-blur-sm ${memberType === type.id
                     ? 'bg-primary border-primary text-white shadow-2xl shadow-primary/20'
-                    : 'border-white/5 text-stone-500 hover:border-white/20 hover:text-white'
+                    : 'border-white/5 text-stone-500 hover:border-white/20 hover:text-white bg-white/[0.02]'
                     }`}
                 >
-                  <span className="block text-[10px] font-black uppercase tracking-[0.3em] mb-1">{type.label}</span>
-                  <span className="block text-[8px] uppercase tracking-widest opacity-60 font-light italic">{type.desc}</span>
+                  <span className="block mb-1">{type.label}</span>
+                  <span className="block text-[8px] opacity-40 font-light italic normal-case tracking-widest">{type.desc}</span>
                 </button>
               ))}
             </div>
