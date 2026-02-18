@@ -11,21 +11,41 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
     const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
     const [formData, setFormData] = useState({
         email: '',
-        name: ''
+        name: '',
+        memberType: '' as 'inmate' | 'client' | ''
     });
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('loading');
-        // Simulate API call
-        setTimeout(() => {
-            setStatus('success');
-            setTimeout(() => {
-                onClose();
+
+        try {
+            const res = await fetch('https://app.kit.com/forms/30fbdd215/subscriptions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    email_address: formData.email,
+                    first_name: formData.name,
+                    fields: { member_type: formData.memberType }
+                })
+            });
+
+            if (res.ok) {
+                setStatus('success');
+                setTimeout(() => {
+                    onClose();
+                    setStatus('idle');
+                    setFormData({ email: '', name: '', memberType: '' });
+                }, 3000);
+            } else {
                 setStatus('idle');
-                setFormData({ email: '', name: '' });
-            }, 2000);
-        }, 1500);
+                alert('Subscription failed. Please try again.');
+            }
+        } catch (err) {
+            console.error(err);
+            setStatus('idle');
+            alert('An error occurred. Please check your connection.');
+        }
     };
 
     return (
@@ -105,6 +125,41 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                                             placeholder="Alex Johnson"
                                             className="w-full px-6 py-4 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-stone-50 transition-all font-medium"
                                         />
+                                    </div>
+
+                                    <div className="space-y-4">
+                                        <label className="text-xs font-black uppercase tracking-widest text-stone-400 flex items-center gap-2">
+                                            Member Type <span className="text-stone-300 font-normal italic">(Optional)</span>
+                                        </label>
+                                        <div className="grid grid-cols-2 gap-4">
+                                            <button
+                                                type="button"
+                                                onClick={() => setFormData({ ...formData, memberType: 'inmate' })}
+                                                className={`px-4 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${formData.memberType === 'inmate'
+                                                    ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
+                                                    : 'bg-stone-50 border-stone-200 text-stone-500 hover:border-primary/50'
+                                                    }`}
+                                            >
+                                                The Inmate
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setFormData({ ...formData, memberType: 'client' })}
+                                                className={`px-4 py-4 rounded-2xl border text-[10px] font-black uppercase tracking-widest transition-all ${formData.memberType === 'client'
+                                                    ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20'
+                                                    : 'bg-stone-50 border-stone-200 text-stone-500 hover:border-primary/50'
+                                                    }`}
+                                            >
+                                                The Client
+                                            </button>
+                                        </div>
+                                        <p className="text-[9px] text-stone-400 italic leading-relaxed">
+                                            {formData.memberType === 'inmate'
+                                                ? "Select this if you are seeking connection and would like to be part of the community list."
+                                                : formData.memberType === 'client'
+                                                    ? "Select this if you are looking to connect with and support those on the community list."
+                                                    : "Choosing a type helps us curate your experience, but you can leave this blank."}
+                                        </p>
                                     </div>
 
                                     <motion.button

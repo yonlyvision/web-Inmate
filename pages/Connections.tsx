@@ -16,6 +16,44 @@ const staggerContainer = {
 };
 
 export const Connections: React.FC = () => {
+  const [status, setStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
+  const [email, setEmail] = React.useState('');
+  const [memberType, setMemberType] = React.useState<'inmate' | 'client' | null>(null);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!memberType) {
+      alert('Please select a member type first.');
+      return;
+    }
+    setStatus('loading');
+
+    try {
+      const res = await fetch('https://app.kit.com/forms/30fbdd215/subscriptions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email_address: email,
+          fields: { member_type: memberType }
+        })
+      });
+
+      if (res.ok) {
+        setStatus('success');
+        setEmail('');
+        setMemberType(null);
+        setTimeout(() => setStatus('idle'), 5000);
+      } else {
+        setStatus('idle');
+        alert('Subscription failed. Please try again.');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('idle');
+      alert('An error occurred. Please check your connection.');
+    }
+  };
+
   return (
     <div className="bg-black min-h-screen font-sans text-white pb-48">
       {/* Editorial Hero */}
@@ -148,20 +186,46 @@ export const Connections: React.FC = () => {
             </p>
           </div>
 
-          <form className="relative max-w-2xl mx-auto group">
-            <input
-              type="email"
-              placeholder="Your digital identifier (email)"
-              className="w-full px-12 py-8 rounded-full border border-white/10 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/50 backdrop-blur-3xl text-white placeholder:text-stone-700 transition-all font-light italic text-lg"
-            />
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 px-12 py-5 bg-white text-black rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all shadow-2xl"
-            >
-              Request Entry
-            </motion.button>
-          </form>
+          <div className="space-y-12">
+            <div className="grid grid-cols-2 gap-4 max-w-2xl mx-auto">
+              {[
+                { id: 'inmate', label: 'The Inmate', desc: 'Seeking Connection' },
+                { id: 'client', label: 'The Client', desc: 'Seeking to Connect' }
+              ].map((type) => (
+                <button
+                  key={type.id}
+                  onClick={() => setMemberType(type.id as any)}
+                  className={`p-6 rounded-[2rem] border transition-all text-center group relative overflow-hidden ${memberType === type.id
+                    ? 'bg-primary border-primary text-white shadow-2xl shadow-primary/20'
+                    : 'border-white/5 text-stone-500 hover:border-white/20 hover:text-white'
+                    }`}
+                >
+                  <span className="block text-[10px] font-black uppercase tracking-[0.3em] mb-1">{type.label}</span>
+                  <span className="block text-[8px] uppercase tracking-widest opacity-60 font-light italic">{type.desc}</span>
+                </button>
+              ))}
+            </div>
+
+            <form onSubmit={handleSubmit} className="relative max-w-2xl mx-auto group">
+              <input
+                required
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your digital identifier (email)"
+                className="w-full px-12 py-8 rounded-full border border-white/10 focus:outline-none focus:ring-1 focus:ring-primary bg-stone-900/50 backdrop-blur-3xl text-white placeholder:text-stone-700 transition-all font-light italic text-lg"
+              />
+              <motion.button
+                type="submit"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                disabled={status === 'loading'}
+                className="absolute right-4 top-1/2 -translate-y-1/2 px-12 py-5 bg-white text-black rounded-full font-black uppercase tracking-widest text-[10px] hover:bg-primary hover:text-white transition-all shadow-2xl disabled:opacity-50"
+              >
+                {status === 'loading' ? 'Processing...' : status === 'success' ? 'Success!' : 'Request Entry'}
+              </motion.button>
+            </form>
+          </div>
 
           <div className="pt-12 border-t border-white/5 flex flex-col items-center gap-6">
             <p className="text-[10px] font-black uppercase tracking-[0.4em] text-stone-600">
