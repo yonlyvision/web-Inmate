@@ -20,14 +20,18 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
         setStatus('loading');
 
         try {
-            const res = await fetch('https://app.convertkit.com/forms/30fbdd215/subscriptions', {
+            console.log('Submitting to /api/subscribe...');
+            const res = await fetch('/api/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    email_address: formData.email,
+                    email: formData.email,
                     first_name: formData.name
                 })
             });
+
+            const data = await res.json();
+            console.log('API Response:', data);
 
             if (res.ok) {
                 setStatus('success');
@@ -37,13 +41,15 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                     setFormData({ email: '', name: '', memberType: '' });
                 }, 3000);
             } else {
+                console.error('Subscription error:', data);
                 setStatus('idle');
-                alert('Subscription failed. This can happen if the form ID is incorrect or Kit is blocking the request. Please try again later.');
+                const errorMessage = data.message || data.error || 'Subscription failed. Please check the console for details.';
+                alert(`Error: ${errorMessage}`);
             }
         } catch (err) {
-            console.error(err);
+            console.error('Fetch error:', err);
             setStatus('idle');
-            alert('An error occurred. Please check your connection.');
+            alert('An error occurred. Please check the console for details.');
         }
     };
 
