@@ -46,7 +46,7 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                         <div className="p-10">
                             {/* 
                                 STANDARD HTML FORM POST
-                                Directly posts to Kit to avoid script hijacking or CORS issues.
+                                Directly posts to Kit (app.kit.com) to avoid script hijacking or CORS issues.
                             */}
                             <form
                                 action="https://app.kit.com/forms/9095440/subscriptions"
