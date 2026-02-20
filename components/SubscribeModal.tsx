@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Send, CheckCircle2, User, Mail } from 'lucide-react';
+import { X } from 'lucide-react';
 
 interface SubscribeModalProps {
     isOpen: boolean;
@@ -8,47 +8,18 @@ interface SubscribeModalProps {
 }
 
 export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose }) => {
-    const [status, setStatus] = useState<'idle' | 'loading' | 'success'>('idle');
-    const [formData, setFormData] = useState({
-        email: '',
-        name: '',
-        memberType: '' as 'inmate' | 'client' | ''
-    });
+    const scriptRef = useRef<HTMLScriptElement | null>(null);
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus('loading');
-
-        try {
-            console.log('Submitting to Kit Form 9095440...');
-
-            const body = new FormData();
-            body.append('email_address', formData.email);
-            if (formData.name) body.append('first_name', formData.name);
-
-            // Use 'no-cors' mode to bypass CORS. 
-            // The response will be opaque (we can't read it), but the submission will verify on Kit's side.
-            await fetch('https://app.kit.com/forms/9095440/subscriptions', {
-                method: 'POST',
-                body: body,
-                mode: 'no-cors'
-            });
-
-            // Optimistically assume success since we can't read the response in no-cors mode
-            // If it failed network-wise, it would throw an error caught below.
-            setStatus('success');
-            setTimeout(() => {
-                onClose();
-                setStatus('idle');
-                setFormData({ email: '', name: '', memberType: '' });
-            }, 3000);
-
-        } catch (err) {
-            console.error('Submission error:', err);
-            setStatus('idle');
-            alert('An error occurred. Please check your connection and try again.');
+    useEffect(() => {
+        // Load Kit script when modal opens
+        if (isOpen && !scriptRef.current) {
+            const script = document.createElement('script');
+            script.src = "https://f.convertkit.com/ckjs/ck.5.js";
+            script.async = true;
+            document.body.appendChild(script);
+            scriptRef.current = script;
         }
-    };
+    }, [isOpen]);
 
     return (
         <AnimatePresence>
@@ -86,72 +57,55 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
                         </div>
 
                         <div className="p-10">
-                            {status === 'success' ? (
-                                <motion.div
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    className="py-12 text-center space-y-6"
-                                >
-                                    <div className="w-20 h-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
-                                        <CheckCircle2 size={40} />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h4 className="text-2xl font-bold text-stone-900">You're on the list!</h4>
-                                        <p className="text-stone-500 font-medium italic">Welcome to the family. Check your inbox soon.</p>
-                                    </div>
-                                </motion.div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-black uppercase tracking-widest text-stone-400 flex items-center gap-2">
-                                            <Mail size={12} /> Email Address <span className="text-primary">*</span>
-                                        </label>
-                                        <input
-                                            required
-                                            type="email"
-                                            value={formData.email}
-                                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                            placeholder="alex@example.com"
-                                            className="w-full px-6 py-4 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-stone-50 text-stone-900 transition-all font-medium"
-                                        />
-                                    </div>
+                            {/* Kit Form Embed (Converted to JSX) */}
+                            <form
+                                action="https://app.kit.com/forms/9095440/subscriptions"
+                                className="seva-form formkit-form space-y-6"
+                                method="post"
+                                data-sv-form="9095440"
+                                data-uid="30fbfdd215"
+                                data-format="modal"
+                                data-version="5"
+                                data-options='{"settings":{"after_subscribe":{"action":"message","success_message":"Success! Now check your email to confirm your subscription.","redirect_url":""},"analytics":{"google":null,"fathom":null,"facebook":null,"segment":null,"pinterest":null,"sparkloop":null,"googletagmanager":null},"modal":{"trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15},"powered_by":{"show":false,"url":"https://kit.com/features/forms?utm_campaign=poweredby&utm_content=form&utm_medium=referral&utm_source=dynamic"},"recaptcha":{"enabled":false},"return_visitor":{"action":"show","custom_content":""},"slide_in":{"display_in":"bottom_right","trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15},"sticky_bar":{"display_in":"top","trigger":"timer","scroll_percentage":null,"timer":5,"devices":"all","show_once_every":15}},"version":"5"}'
+                                style={{ borderRadius: '0px' }}
+                            >
+                                <div data-style="full" style={{ display: 'block' }}>
+                                    <ul className="formkit-alert formkit-alert-error text-red-500 text-sm text-center mb-4" data-element="errors" data-group="alert"></ul>
 
-                                    <div className="space-y-2">
-                                        <label className="text-xs font-black uppercase tracking-widest text-stone-400 flex items-center gap-2">
-                                            <User size={12} /> Name <span className="text-stone-300 font-normal italic">(Optional)</span>
-                                        </label>
-                                        <input
-                                            type="text"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            placeholder="Alex Johnson"
-                                            className="w-full px-6 py-4 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-stone-50 text-stone-900 transition-all font-medium"
-                                        />
-                                    </div>
+                                    <div data-element="fields" className="seva-fields formkit-fields space-y-6">
+                                        <div className="formkit-field space-y-2">
+                                            <input
+                                                className="formkit-input w-full px-6 py-4 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-stone-50 text-stone-900 transition-all font-medium"
+                                                name="email_address"
+                                                aria-label="Email Address"
+                                                placeholder="Email Address"
+                                                required
+                                                type="email"
+                                            />
+                                        </div>
 
-                                    <motion.button
-                                        whileHover={{ scale: 1.02 }}
-                                        whileTap={{ scale: 0.98 }}
-                                        disabled={status === 'loading'}
-                                        className={`w-full py-5 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-xl ${status === 'loading'
-                                            ? 'bg-stone-200 text-stone-400 cursor-not-allowed'
-                                            : 'bg-stone-900 text-white hover:bg-primary shadow-stone-900/10'
-                                            }`}
-                                    >
-                                        {status === 'loading' ? (
-                                            <div className="w-5 h-5 border-2 border-stone-400 border-t-white rounded-full animate-spin"></div>
-                                        ) : (
-                                            <>
-                                                <Send size={18} />
-                                                Subscribe
-                                            </>
-                                        )}
-                                    </motion.button>
-                                    <p className="text-center text-[10px] text-stone-400 uppercase tracking-widest font-black italic">
-                                        Weekly stories, no spam.
-                                    </p>
-                                </form>
-                            )}
+                                        <div className="formkit-field space-y-2">
+                                            <input
+                                                className="formkit-input w-full px-6 py-4 rounded-2xl border border-stone-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary bg-stone-50 text-stone-900 transition-all font-medium"
+                                                name="first_name"
+                                                aria-label="First Name"
+                                                placeholder="First Name (Optional)"
+                                                type="text"
+                                            />
+                                        </div>
+
+                                        <button
+                                            data-element="submit"
+                                            className="formkit-submit w-full py-5 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-xl bg-stone-900 text-white hover:bg-primary shadow-stone-900/10"
+                                        >
+                                            <span className="">Subscribe</span>
+                                        </button>
+                                    </div>
+                                    <div className="formkit-disclaimer text-center text-[10px] text-stone-400 uppercase tracking-widest font-black italic mt-4" data-element="disclaimer">
+                                        We respect your privacy. Unsubscribe at any time.
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </motion.div>
                 </div>
