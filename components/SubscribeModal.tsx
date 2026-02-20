@@ -20,36 +20,33 @@ export const SubscribeModal: React.FC<SubscribeModalProps> = ({ isOpen, onClose 
         setStatus('loading');
 
         try {
-            console.log('Submitting to /api/subscribe...');
-            const res = await fetch('/api/subscribe', {
+            console.log('Submitting to Kit Form 9095440...');
+
+            const body = new FormData();
+            body.append('email_address', formData.email);
+            if (formData.name) body.append('first_name', formData.name);
+
+            // Use 'no-cors' mode to bypass CORS. 
+            // The response will be opaque (we can't read it), but the submission will verify on Kit's side.
+            await fetch('https://app.kit.com/forms/9095440/subscriptions', {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: formData.email,
-                    first_name: formData.name
-                })
+                body: body,
+                mode: 'no-cors'
             });
 
-            const data = await res.json();
-            console.log('API Response:', data);
-
-            if (res.ok) {
-                setStatus('success');
-                setTimeout(() => {
-                    onClose();
-                    setStatus('idle');
-                    setFormData({ email: '', name: '', memberType: '' });
-                }, 3000);
-            } else {
-                console.error('Subscription error:', data);
+            // Optimistically assume success since we can't read the response in no-cors mode
+            // If it failed network-wise, it would throw an error caught below.
+            setStatus('success');
+            setTimeout(() => {
+                onClose();
                 setStatus('idle');
-                const errorMessage = data.message || data.error || 'Subscription failed. Please check the console for details.';
-                alert(`Error: ${errorMessage}`);
-            }
+                setFormData({ email: '', name: '', memberType: '' });
+            }, 3000);
+
         } catch (err) {
-            console.error('Fetch error:', err);
+            console.error('Submission error:', err);
             setStatus('idle');
-            alert('An error occurred. Please check the console for details.');
+            alert('An error occurred. Please check your connection and try again.');
         }
     };
 
