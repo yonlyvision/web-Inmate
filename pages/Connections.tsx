@@ -36,7 +36,6 @@ export const Connections: React.FC = () => {
       if (res.ok) {
         setStatus('success');
         setEmail('');
-        setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('idle');
         alert('Subscription failed. Please try again.');
@@ -216,6 +215,39 @@ export const Connections: React.FC = () => {
           </div>
         </div>
       </motion.section >
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {status === 'success' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="glass max-w-md w-full p-10 rounded-[3rem] text-center border border-white/10 relative shadow-2xl bg-stone-900/90"
+            >
+              <div className="w-20 h-20 mx-auto bg-primary/20 text-primary rounded-[2rem] flex items-center justify-center mb-8">
+                <Sparkles size={32} />
+              </div>
+              <h3 className="font-serif text-3xl font-bold text-white mb-4 italic">You're on the list.</h3>
+              <p className="text-stone-400 font-light text-lg leading-relaxed mb-10">
+                Your entry has been secured. We will contact you when the doors open.
+              </p>
+              <button
+                onClick={() => setStatus('idle')}
+                className="w-full px-8 py-5 bg-white text-black rounded-full font-black uppercase tracking-[0.2em] text-[10px] hover:bg-primary hover:text-white transition-all"
+              >
+                Close Window
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div >
   );
 };
