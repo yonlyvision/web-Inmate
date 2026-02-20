@@ -36,13 +36,14 @@ export const Connections: React.FC = () => {
     setStatus('loading');
 
     try {
-      const res = await fetch('https://app.convertkit.com/forms/30fbdd215/subscriptions', {
+      const formData = new URLSearchParams();
+      formData.append('email_address', email);
+      formData.append('fields[member_type]', memberType);
+
+      const res = await fetch('https://app.kit.com/forms/9095440/subscriptions', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email_address: email,
-          fields: { member_type: memberType }
-        })
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+        body: formData.toString()
       });
 
       if (res.ok) {
