@@ -90,6 +90,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   {path === '/' ? 'Stories' : path.slice(1).replace('-', ' ')}
                 </Link>
               ))}
+              <a
+                href="mailto:support@inm8tebook.net"
+                className="relative text-stone-400 hover:text-white px-1 py-1 text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500"
+              >
+                Contact
+              </a>
               <Magnetic strength={0.1}>
                 <motion.button
                   onClick={() => setIsSubscribeOpen(true)}
@@ -135,6 +141,13 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     {path === '/' ? 'The Stories' : path.charAt(1).toUpperCase() + path.slice(2).replace('-', ' ')}
                   </Link>
                 ))}
+                <a
+                  href="mailto:support@inm8tebook.net"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors italic"
+                >
+                  Contact Us
+                </a>
                 <button
                   onClick={() => setIsSubscribeOpen(true)}
                   className="w-full bg-primary text-white py-6 rounded-2xl text-lg font-black uppercase tracking-widest shadow-2xl shadow-primary/20 mt-8"
