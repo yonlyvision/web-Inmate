@@ -3,6 +3,7 @@ import { Menu, X, Instagram, Twitter, Facebook, Mic, Coffee, Mail } from 'lucide
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SubscribeModal } from './SubscribeModal';
+import { ContactModal } from './ContactModal';
 import Magnetic from './Magnetic';
 
 interface LayoutProps {
@@ -12,6 +13,7 @@ interface LayoutProps {
 export const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSubscribeOpen, setIsSubscribeOpen] = useState(false);
+  const [isContactOpen, setIsContactOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
@@ -90,12 +92,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                   {path === '/' ? 'Stories' : path.slice(1).replace('-', ' ')}
                 </Link>
               ))}
-              <a
-                href="mailto:support@inm8tebook.net"
+              <button
+                onClick={() => setIsContactOpen(true)}
                 className="relative text-stone-400 hover:text-white px-1 py-1 text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500"
               >
                 Contact
-              </a>
+              </button>
               <Magnetic strength={0.1}>
                 <motion.button
                   onClick={() => setIsSubscribeOpen(true)}
@@ -141,13 +143,15 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
                     {path === '/' ? 'The Stories' : path.charAt(1).toUpperCase() + path.slice(2).replace('-', ' ')}
                   </Link>
                 ))}
-                <a
-                  href="mailto:support@inm8tebook.net"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors italic"
+                <button
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    setIsContactOpen(true);
+                  }}
+                  className="text-left text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors italic"
                 >
                   Contact Us
-                </a>
+                </button>
                 <button
                   onClick={() => setIsSubscribeOpen(true)}
                   className="w-full bg-primary text-white py-6 rounded-2xl text-lg font-black uppercase tracking-widest shadow-2xl shadow-primary/20 mt-8"
@@ -224,7 +228,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <ul className="space-y-6">
               <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Mic size={18} /> The Podcast</a></li>
               <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Coffee size={18} /> Support Art</a></li>
-              <li><a href="mailto:support@inm8tebook.net" className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Mail size={18} /> Contact Us</a></li>
+              <li><button onClick={() => setIsContactOpen(true)} className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Mail size={18} /> Contact Us</button></li>
             </ul>
           </div>
         </div>
@@ -235,6 +239,10 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       <SubscribeModal
         isOpen={isSubscribeOpen}
         onClose={() => setIsSubscribeOpen(false)}
+      />
+      <ContactModal
+        isOpen={isContactOpen}
+        onClose={() => setIsContactOpen(false)}
       />
     </div>
   );
