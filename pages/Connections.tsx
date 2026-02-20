@@ -18,18 +18,18 @@ const staggerContainer = {
 export const Connections: React.FC = () => {
   const [status, setStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const [email, setEmail] = React.useState('');
-  const [memberType, setMemberType] = React.useState<string | null>(null);
+  const [userType, setUserType] = React.useState<string | null>(null);
   const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
 
   const roles = [
-    { id: 'rebuilder', label: 'Seeking Connection', sub: 'Rebuilder' },
-    { id: 'supporter', label: 'Open to Connection', sub: 'Supporter' },
-    { id: 'org_advocate', label: 'Organization / Advocate', sub: 'Support Network' }
+    { id: 'seeking', label: 'Seeking Connection', sub: 'Rebuilder' },
+    { id: 'open', label: 'Open to Connection', sub: 'Supporter' },
+    { id: 'organization', label: 'Organization / Advocate', sub: 'Support Network' }
   ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!memberType) {
+    if (!userType) {
       alert('Please select your role first.');
       return;
     }
@@ -38,9 +38,9 @@ export const Connections: React.FC = () => {
     try {
       const formData = new URLSearchParams();
       formData.append('email_address', email);
-      formData.append('fields[member_type]', memberType);
+      formData.append('fields[user_type]', userType);
 
-      const res = await fetch('https://app.kit.com/forms/9095440/subscriptions', {
+      const res = await fetch('https://app.kit.com/forms/9109961/subscriptions', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
         body: formData.toString()
@@ -49,7 +49,7 @@ export const Connections: React.FC = () => {
       if (res.ok) {
         setStatus('success');
         setEmail('');
-        setMemberType(null);
+        setUserType(null);
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('idle');
@@ -204,8 +204,8 @@ export const Connections: React.FC = () => {
               >
                 <div>
                   <span className="block text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-1">Select Your Role</span>
-                  <span className={`text-xl font-serif italic ${memberType ? 'text-white' : 'text-stone-500'}`}>
-                    {memberType ? roles.find(r => r.id === memberType)?.label : 'How would you like to join?'}
+                  <span className={`text-xl font-serif italic ${userType ? 'text-white' : 'text-stone-500'}`}>
+                    {userType ? roles.find(r => r.id === userType)?.label : 'How would you like to join?'}
                   </span>
                 </div>
                 <div className={`transition-transform duration-500 text-stone-600 group-hover:text-primary ${isDropdownOpen ? 'rotate-180' : ''}`}>
@@ -226,19 +226,19 @@ export const Connections: React.FC = () => {
                         <button
                           key={role.id}
                           onClick={() => {
-                            setMemberType(role.id);
+                            setUserType(role.id);
                             setIsDropdownOpen(false);
                           }}
-                          className={`w-full p-8 rounded-2xl text-left transition-all group flex items-center justify-between ${memberType === role.id ? 'bg-primary text-white' : 'hover:bg-white/5 text-stone-400 hover:text-white'
+                          className={`w-full p-8 rounded-2xl text-left transition-all group flex items-center justify-between ${userType === role.id ? 'bg-primary text-white' : 'hover:bg-white/5 text-stone-400 hover:text-white'
                             }`}
                         >
                           <div>
                             <span className="block text-2xl font-serif italic mb-1">{role.label}</span>
-                            <span className={`text-[10px] font-black uppercase tracking-widest ${memberType === role.id ? 'text-white/60' : 'text-primary/60'}`}>
+                            <span className={`text-[10px] font-black uppercase tracking-widest ${userType === role.id ? 'text-white/60' : 'text-primary/60'}`}>
                               {role.sub}
                             </span>
                           </div>
-                          {memberType === role.id && <Sparkles size={20} className="text-white animate-pulse" />}
+                          {userType === role.id && <Sparkles size={20} className="text-white animate-pulse" />}
                         </button>
                       ))}
                     </div>
