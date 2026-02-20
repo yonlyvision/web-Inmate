@@ -18,27 +18,14 @@ const staggerContainer = {
 export const Connections: React.FC = () => {
   const [status, setStatus] = React.useState<'idle' | 'loading' | 'success'>('idle');
   const [email, setEmail] = React.useState('');
-  const [userType, setUserType] = React.useState<string | null>(null);
-  const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
-
-  const roles = [
-    { id: 'seeking', label: 'Seeking Connection', sub: 'Rebuilder' },
-    { id: 'open', label: 'Open to Connection', sub: 'Supporter' },
-    { id: 'organization', label: 'Organization / Advocate', sub: 'Support Network' }
-  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!userType) {
-      alert('Please select your role first.');
-      return;
-    }
     setStatus('loading');
 
     try {
       const formData = new URLSearchParams();
       formData.append('email_address', email);
-      formData.append('fields[user_type]', userType);
 
       const res = await fetch('https://app.kit.com/forms/9109961/subscriptions', {
         method: 'POST',
@@ -49,7 +36,6 @@ export const Connections: React.FC = () => {
       if (res.ok) {
         setStatus('success');
         setEmail('');
-        setUserType(null);
         setTimeout(() => setStatus('idle'), 5000);
       } else {
         setStatus('idle');
@@ -195,58 +181,6 @@ export const Connections: React.FC = () => {
           </div>
 
           <div className="space-y-12 max-w-2xl mx-auto">
-            {/* Custom Dropdown */}
-            <div className="relative z-50">
-              <button
-                type="button"
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="w-full px-12 py-8 rounded-full border border-white/20 bg-stone-900/80 backdrop-blur-3xl text-left flex items-center justify-between group hover:border-primary/50 transition-all"
-              >
-                <div>
-                  <span className="block text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-1">Select Your Role</span>
-                  <span className={`text-xl font-serif italic ${userType ? 'text-white' : 'text-stone-500'}`}>
-                    {userType ? roles.find(r => r.id === userType)?.label : 'How would you like to join?'}
-                  </span>
-                </div>
-                <div className={`transition-transform duration-500 text-stone-600 group-hover:text-primary ${isDropdownOpen ? 'rotate-180' : ''}`}>
-                  <Zap size={20} />
-                </div>
-              </button>
-
-              <AnimatePresence>
-                {isDropdownOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -20, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 10, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                    className="absolute top-full left-0 w-full bg-stone-900/95 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] shadow-2xl overflow-hidden mt-4"
-                  >
-                    <div className="p-4 space-y-2">
-                      {roles.map((role) => (
-                        <button
-                          key={role.id}
-                          onClick={() => {
-                            setUserType(role.id);
-                            setIsDropdownOpen(false);
-                          }}
-                          className={`w-full p-8 rounded-2xl text-left transition-all group flex items-center justify-between ${userType === role.id ? 'bg-primary text-white' : 'hover:bg-white/5 text-stone-400 hover:text-white'
-                            }`}
-                        >
-                          <div>
-                            <span className="block text-2xl font-serif italic mb-1">{role.label}</span>
-                            <span className={`text-[10px] font-black uppercase tracking-widest ${userType === role.id ? 'text-white/60' : 'text-primary/60'}`}>
-                              {role.sub}
-                            </span>
-                          </div>
-                          {userType === role.id && <Sparkles size={20} className="text-white animate-pulse" />}
-                        </button>
-                      ))}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-
             <form onSubmit={handleSubmit} className="relative group">
               <input
                 required
@@ -281,7 +215,7 @@ export const Connections: React.FC = () => {
             </div>
           </div>
         </div>
-      </motion.section>
-    </div>
+      </motion.section >
+    </div >
   );
 };
