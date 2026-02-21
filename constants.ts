@@ -24,21 +24,21 @@ export const PODCAST_EPISODES: PodcastEpisode[] = [
     id: '1',
     title: "Ep. 42: Why We Fall in Love",
     duration: "45 min",
-    date: "Oct 12, 2023",
+    date: "Coming soon in 2026",
     description: "Discussing the psychology of attachment with Dr. Sarah Jenkins."
   },
   {
     id: '2',
     title: "Ep. 41: The Art of Letting Go",
     duration: "38 min",
-    date: "Oct 05, 2023",
+    date: "Coming soon in 2026",
     description: "How to move forward when the past feels comfortable."
   },
   {
     id: '3',
     title: "Ep. 40: Finding Solitude",
     duration: "50 min",
-    date: "Sep 28, 2023",
+    date: "Coming soon in 2026",
     description: "The difference between being alone and being lonely."
   }
 ];
