@@ -81,6 +81,12 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose }) =
                             <div className="space-y-2">
                                 <span className="text-primary font-bold uppercase text-xs tracking-widest">Get in Touch</span>
                                 <h3 className="font-serif text-3xl font-bold tracking-tight">Contact INM8TE</h3>
+                                <p className="text-stone-400 text-sm mt-2 flex items-center gap-2">
+                                    <Mail size={14} />
+                                    <a href="mailto:support@inm8tebook.net" className="hover:text-white transition-colors underline decoration-stone-700 underline-offset-4">
+                                        support@inm8tebook.net
+                                    </a>
+                                </p>
                             </div>
                         </div>
 

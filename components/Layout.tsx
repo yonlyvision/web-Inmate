@@ -229,6 +229,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
               <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Mic size={18} /> The Podcast</a></li>
               <li><a href="#" className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Coffee size={18} /> Support Art</a></li>
               <li><button onClick={() => setIsContactOpen(true)} className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide"><Mail size={18} /> Contact Us</button></li>
+              <li><a href="mailto:support@inm8tebook.net" className="hover:text-primary transition-colors flex items-center gap-3 font-bold text-sm tracking-wide text-stone-400 mt-2 hover:text-white">support@inm8tebook.net</a></li>
             </ul>
           </div>
         </div>
