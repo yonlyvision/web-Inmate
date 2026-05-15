@@ -145,7 +145,7 @@ export const Lifestyle: React.FC = () => {
                   <p className="text-stone-500 font-light italic leading-relaxed text-lg">{recipe.description}</p>
 
                   <div className="flex items-center justify-between pt-8 border-t border-white/5">
-                    <div className="flex items-center gap-3 text-stone-600">
+                    <div className="flex items-center gap-3 text-stone-400">
                       <Heart size={16} />
                       <span className="text-[10px] font-black uppercase tracking-[0.2em]">{recipe.time}</span>
                     </div>
@@ -175,7 +175,7 @@ export const Lifestyle: React.FC = () => {
             "Eating is an <span className="italic text-stone-500 text-gradient">intelligent act</span>. When we nourish ourselves, we nourish the possibilities of our tomorrow."
           </blockquote>
           <div className="pt-12 border-t border-white/5 inline-block px-12">
-            <p className="text-[10px] font-black uppercase tracking-[0.8em] text-stone-600">The INM8TE <span className="text-primary italic lowercase font-serif tracking-normal">book</span> Philosophy</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.8em] text-stone-400">The INM8TE <span className="text-primary italic lowercase font-serif tracking-normal">book</span> Philosophy</p>
           </div>
         </div>
       </motion.section>

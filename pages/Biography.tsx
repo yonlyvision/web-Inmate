@@ -205,8 +205,8 @@ export const Biography: React.FC = () => {
                             </div>
                             <p className="text-stone-500 font-light italic leading-relaxed text-lg">{event.desc}</p>
                             <div className="pt-6 flex items-center gap-4 border-t border-white/5">
-                                <Calendar size={18} className="text-stone-700" />
-                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-600">{event.date}</span>
+                                <Calendar size={18} className="text-stone-400" />
+                                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-400">{event.date}</span>
                             </div>
                         </motion.div>
                     ))}

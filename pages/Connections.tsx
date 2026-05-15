@@ -202,7 +202,7 @@ export const Connections: React.FC = () => {
           </div>
 
           <div className="pt-12 border-t border-white/5 flex flex-col items-center gap-6">
-            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-stone-600">
+            <p className="text-[10px] font-black uppercase tracking-[0.4em] text-stone-400">
               Join 1,200+ individuals awaiting connection
             </p>
             <div className="flex -space-x-4">

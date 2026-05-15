@@ -210,13 +210,13 @@ export const Home: React.FC = () => {
                     className="p-10 rounded-3xl transition-all flex items-center justify-between group cursor-pointer border border-white/5 hover:border-primary/50 glass"
                   >
                     <div className="flex items-center gap-10">
-                      <span className="font-serif italic text-stone-700 text-4xl group-hover:text-primary transition-colors">0{idx + 1}</span>
+                      <span className="font-serif italic text-stone-500 text-4xl group-hover:text-primary transition-colors">0{idx + 1}</span>
                       <div>
                         <h4 className="font-bold text-2xl text-stone-200 group-hover:text-white transition-colors mb-2">{ep.title}</h4>
-                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-600 group-hover:text-stone-400">{ep.date} • {ep.duration}</p>
+                        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-stone-400 group-hover:text-stone-300">{ep.date} • {ep.duration}</p>
                       </div>
                     </div>
-                    <ArrowRight size={24} className="text-stone-800 group-hover:text-primary transition-all group-hover:scale-125" />
+                    <ArrowRight size={24} className="text-stone-600 group-hover:text-primary transition-all group-hover:scale-125" />
                   </motion.div>
                 ))}
               </div>
