@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const FRAME_COUNT = 192;
 const FPS = 24;
+const START_THRESHOLD = 24; // start playing after first 1 second of frames
 
 export const HeroAnimation: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [images, setImages] = useState<HTMLImageElement[]>([]);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const loadedCountRef = useRef(0);
   const [isLoaded, setIsLoaded] = useState(false);
   const [visible, setVisible] = useState(false);
   const requestRef = useRef<number>(0);
@@ -23,30 +25,24 @@ export const HeroAnimation: React.FC = () => {
     return () => observer.disconnect();
   }, []);
 
-  // Preload images
+  // Preload images — start playing after START_THRESHOLD frames, load rest in background
   useEffect(() => {
-    let loadedCount = 0;
-    const loadedImages: HTMLImageElement[] = [];
-
-    const loadPromises = Array.from({ length: FRAME_COUNT }).map((_, i) => {
-      return new Promise<void>((resolve, reject) => {
-        const img = new Image();
-        const frameNumber = String(i).padStart(3, '0');
-        img.src = `${import.meta.env.BASE_URL}animation/frame_${frameNumber}.jpg`;
-        img.onload = () => {
-          loadedImages[i] = img;
-          loadedCount++;
-          if (loadedCount === FRAME_COUNT) {
-            setImages(loadedImages);
-            setIsLoaded(true);
+    Array.from({ length: FRAME_COUNT }).forEach((_, i) => {
+      const img = new Image();
+      const frameNumber = String(i).padStart(3, '0');
+      img.src = `${import.meta.env.BASE_URL}animation/frame_${frameNumber}.jpg`;
+      img.onload = () => {
+        imagesRef.current[i] = img;
+        loadedCountRef.current++;
+        if (loadedCountRef.current === START_THRESHOLD) {
+          if (canvasRef.current && imagesRef.current[0]) {
+            canvasRef.current.width = imagesRef.current[0].width;
+            canvasRef.current.height = imagesRef.current[0].height;
           }
-          resolve();
-        };
-        img.onerror = reject;
-      });
+          setIsLoaded(true);
+        }
+      };
     });
-
-    Promise.all(loadPromises).catch((err) => console.error("Failed to load images", err));
   }, []);
 
   const animate = (time: number) => {
@@ -62,14 +58,13 @@ export const HeroAnimation: React.FC = () => {
     const deltaTime = time - lastTimeRef.current;
 
     if (deltaTime >= 1000 / FPS) {
-      if (canvasRef.current && images.length > 0) {
+      if (canvasRef.current && loadedCountRef.current > 0) {
         const ctx = canvasRef.current.getContext('2d');
         if (ctx) {
-          ctx.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
-
-          const img = images[frameIndexRef.current];
+          const img = imagesRef.current[frameIndexRef.current];
           if (img) {
             const canvas = canvasRef.current;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
             const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
             const x = (canvas.width / 2) - (img.width / 2) * scale;
             const y = (canvas.height / 2) - (img.height / 2) * scale;
@@ -87,7 +82,9 @@ export const HeroAnimation: React.FC = () => {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
           }
 
-          frameIndexRef.current = (frameIndexRef.current + 1) % FRAME_COUNT;
+          // advance to next frame — only if loaded, loop over full FRAME_COUNT
+          const next = (frameIndexRef.current + 1) % FRAME_COUNT;
+          if (imagesRef.current[next]) frameIndexRef.current = next;
         }
       }
       lastTimeRef.current = time;
@@ -97,17 +94,13 @@ export const HeroAnimation: React.FC = () => {
   };
 
   useEffect(() => {
-    if (isLoaded && canvasRef.current) {
-      if (images[0]) {
-        canvasRef.current.width = images[0].width;
-        canvasRef.current.height = images[0].height;
-      }
+    if (isLoaded) {
       requestRef.current = requestAnimationFrame(animate);
     }
     return () => {
       if (requestRef.current) cancelAnimationFrame(requestRef.current);
     };
-  }, [isLoaded, images, visible]);
+  }, [isLoaded, visible]);
 
   return (
     <div ref={containerRef} className="relative w-full h-full bg-stone-100 overflow-hidden group">

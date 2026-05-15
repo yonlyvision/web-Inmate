@@ -88,29 +88,87 @@ export const Biography: React.FC = () => {
             </section>
 
             {/* The Soul: Narrative */}
-            <section className="bg-stone-950 py-48 relative">
+            <section className="bg-stone-950 py-48 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-full h-full bg-texture opacity-5"></div>
+
+                {/* Amber glow orb */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(180,83,9,0.12) 0%, transparent 70%)' }}></div>
+
+                {/* Left amber accent strip */}
+                <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, transparent, #b45309, transparent)' }}></div>
+
+                {/* Left decorative column */}
+                <div className="absolute left-6 top-0 bottom-0 hidden lg:flex flex-col items-center justify-center gap-6">
+                    <div className="w-px h-32" style={{ background: 'linear-gradient(to bottom, transparent, #b45309)' }}></div>
+                    <div className="flex flex-col items-center gap-3">
+                        <span className="font-black text-[9px] uppercase text-amber-600" style={{ writingMode: 'vertical-rl', letterSpacing: '0.4em' }}>The Vision</span>
+                        <div className="w-1.5 h-1.5 rounded-full bg-amber-600"></div>
+                        <span className="font-black text-[9px] uppercase text-stone-500" style={{ writingMode: 'vertical-rl', letterSpacing: '0.4em' }}>2009 — 2026</span>
+                    </div>
+                    <div className="w-px h-32" style={{ background: 'linear-gradient(to bottom, #b45309, transparent)' }}></div>
+                </div>
+
+                {/* Right amber accent strip */}
+                <div className="absolute right-0 top-0 bottom-0 w-1" style={{ background: 'linear-gradient(to bottom, transparent, #b45309, transparent)' }}></div>
+
+                {/* Right decorative column */}
+                <div className="absolute right-6 top-0 bottom-0 hidden lg:flex flex-col items-center justify-center gap-6">
+                    <div className="w-px h-32" style={{ background: 'linear-gradient(to bottom, transparent, rgba(255,255,255,0.15))' }}></div>
+                    <div className="flex flex-col items-center gap-5">
+                        <div className="w-8 h-8 rounded-full flex items-center justify-center" style={{ border: '1px solid #b45309' }}>
+                            <div className="w-2 h-2 rounded-full bg-amber-600"></div>
+                        </div>
+                        <span className="font-serif italic text-[9px] text-stone-500" style={{ writingMode: 'vertical-rl', letterSpacing: '0.3em' }}>inm8tebook</span>
+                        <div className="w-8 h-8 rounded-full" style={{ border: '1px solid rgba(255,255,255,0.1)' }}></div>
+                    </div>
+                    <div className="w-px h-32" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)' }}></div>
+                </div>
+
+                {/* Large decorative quote mark */}
+                <div className="absolute top-8 right-12 pointer-events-none select-none">
+                    <span className="font-serif leading-none" style={{ fontSize: '14rem', color: 'rgba(180,83,9,0.08)' }}>"</span>
+                </div>
+
                 <div className="max-w-4xl mx-auto px-6 relative z-10 text-center space-y-24">
                     <motion.div {...fadeInUp} className="space-y-6">
                         <User size={48} className="mx-auto text-primary opacity-50 mb-8" />
                         <h2 className="font-serif text-6xl font-black text-white tracking-tighter">The <span className="italic text-stone-500">Author.</span></h2>
+                        <p className="text-primary font-black uppercase tracking-[0.3em] text-sm">Leucherin Blackman</p>
                         <div className="h-[2px] w-20 bg-primary mx-auto"></div>
                     </motion.div>
 
-                    <motion.div variants={staggerContainer} initial="initial" whileInView="whiteInView" className="space-y-16 text-2xl text-stone-400 font-light italic leading-relaxed text-left">
+                    <motion.div variants={staggerContainer} initial="initial" whileInView="whileInView" className="space-y-16 text-2xl text-stone-400 font-light italic leading-relaxed text-left">
                         <motion.p variants={fadeInUp}>
-                            Every story has a beginning, and mine started in a place most people try to forget. My journey hasn't been a straight line; it's been a winding road of mistakes, consequences, and ultimately, redemption.
+                            This story starts in 2009, when I was incarcerated and going through a challenging period in my life. One day, I came across a flyer from an organization in the United States, and it sparked something in me. At first, I wanted to create a dating and connection platform for inmates in Canada, something that didn't exist at the time.
                         </motion.p>
                         <motion.p variants={fadeInUp}>
-                            Writing became my escape and my salvation. In the quietest moments, I found my loudest voice. I realized that my experiences, however painful, gave me a unique perspective on resilience, hope, and the power of second chances.
+                            But with financial struggles and family challenges, I wasn't able to bring that idea to life. Still, I never let go of the vision.
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
+                            As the years went on, I kept trying. I trusted people, leaned on family, and looked for ways to make something happen, but I kept running into the same setbacks. During that time, I started writing a book, using everything I was going through as a way to reflect and grow.
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
+                            While incarcerated, my mindset began to shift. It became less about the original idea and more about something deeper, creating something positive for people like me. I wanted to tell real stories, to show that change is possible, and to give people a sense of hope.
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
+                            I reached out for help, and through a chain of connections, things slowly started to move forward. But along the way, some of my ideas were taken, which set me back again.
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
+                            When I was released in 2024, I was determined to start fresh. I tried once more to bring my idea to life, reaching out to a company for support, but once again, the promises made to me weren't kept.
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
+                            In January 2025, I applied for a loan to fund the project, but I was turned down. Even then, I was encouraged to keep going and explore other options. The journey wasn't easy, there were moments where I felt hurt, sick, and close to giving up.
                         </motion.p>
 
                         <motion.blockquote variants={fadeInUp} className="font-serif italic text-4xl lg:text-5xl text-white border-l-4 border-primary pl-12 my-24 py-4 leading-tight">
-                            "I believe that our worst moments do not define us. It is what we do after the fall that truly matters."
+                            "But I didn't."
                         </motion.blockquote>
 
                         <motion.p variants={fadeInUp}>
-                            I founded this platform to share those stories—not just mine, but the stories of everyone who is fighting to rebuild, to grow, and to be seen for who they are today, not who they were yesterday.
+                            Over time, the idea evolved into something bigger than what I first imagined. It was no longer just about connection, it became about people who felt lost, people who made mistakes, and people who were trying to change and find a better path.
+                        </motion.p>
+                        <motion.p variants={fadeInUp}>
+                            In the end, in 2026, that vision finally came to life as inm8tebook. The website is now up and running, and I've built a team around me, but more than anything, this journey reflects everything it took to get here: the setbacks, the pain, and the growth. It showed me that even when you feel lost, you're not defined by your past, and with the right mindset, you can rise, change, and build something that gives others hope too.
                         </motion.p>
                     </motion.div>
                 </div>
