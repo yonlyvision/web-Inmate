@@ -133,7 +133,7 @@ export const Biography: React.FC = () => {
                     <motion.div {...fadeInUp} className="space-y-6">
                         <User size={48} className="mx-auto text-primary opacity-50 mb-8" />
                         <h2 className="font-serif text-6xl font-black text-white tracking-tighter">The <span className="italic text-stone-500">Author.</span></h2>
-                        <p className="text-primary font-black uppercase tracking-[0.3em] text-sm">Leucherin Blackman</p>
+                        <p className="text-primary font-black uppercase tracking-[0.3em] text-sm">King B.</p>
                         <div className="h-[2px] w-20 bg-primary mx-auto"></div>
                     </motion.div>
 
