@@ -6,6 +6,8 @@ import { SubscribeModal } from './SubscribeModal';
 import { ContactModal } from './ContactModal';
 import Magnetic from './Magnetic';
 
+const CONNECTIONS_URL = 'https://connections.inm8tebook.net';
+
 interface LayoutProps {
   children: React.ReactNode;
 }
@@ -84,13 +86,23 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 
             <div className="hidden lg:flex space-x-12 items-center">
               {['/', '/connections', '/lifestyle', '/biography'].map((path) => (
-                <Link
-                  key={path}
-                  to={path}
-                  className={`relative ${isActive(path)} px-1 py-1 text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500`}
-                >
-                  {path === '/' ? 'Stories' : path.slice(1).replace('-', ' ')}
-                </Link>
+                path === '/connections' ? (
+                  <a
+                    key={path}
+                    href={CONNECTIONS_URL}
+                    className="relative text-stone-400 px-1 py-1 text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500"
+                  >
+                    Connections
+                  </a>
+                ) : (
+                  <Link
+                    key={path}
+                    to={path}
+                    className={`relative ${isActive(path)} px-1 py-1 text-[10px] font-black uppercase tracking-[0.3em] transition-all hover:scale-105 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[1px] after:bg-primary after:scale-x-0 after:origin-right hover:after:scale-x-100 hover:after:origin-left after:transition-transform after:duration-500`}
+                  >
+                    {path === '/' ? 'Stories' : path.slice(1).replace('-', ' ')}
+                  </Link>
+                )
               ))}
               <button
                 onClick={() => setIsContactOpen(true)}
@@ -134,14 +146,25 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             >
               <div className="flex flex-col space-y-8">
                 {['/', '/connections', '/lifestyle', '/biography'].map((path) => (
-                  <Link
-                    key={path}
-                    to={path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors italic"
-                  >
-                    {path === '/' ? 'The Stories' : path.charAt(1).toUpperCase() + path.slice(2).replace('-', ' ')}
-                  </Link>
+                  path === '/connections' ? (
+                    <a
+                      key={path}
+                      href={CONNECTIONS_URL}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors italic"
+                    >
+                      Connections
+                    </a>
+                  ) : (
+                    <Link
+                      key={path}
+                      to={path}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="text-3xl font-serif font-bold text-stone-300 hover:text-primary transition-colors italic"
+                    >
+                      {path === '/' ? 'The Stories' : path.charAt(1).toUpperCase() + path.slice(2).replace('-', ' ')}
+                    </Link>
+                  )
                 ))}
                 <button
                   onClick={() => {
@@ -213,12 +236,21 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             <ul className="space-y-6">
               {['Stories', 'Connections', 'Lifestyle', 'Biography'].map((link) => (
                 <li key={link}>
-                  <Link
-                    to={link === 'Stories' ? '/' : `/${link.toLowerCase()}`}
-                    className="hover:text-primary transition-colors font-bold text-sm tracking-wide"
-                  >
-                    {link}
-                  </Link>
+                  {link === 'Connections' ? (
+                    <a
+                      href={CONNECTIONS_URL}
+                      className="hover:text-primary transition-colors font-bold text-sm tracking-wide"
+                    >
+                      {link}
+                    </a>
+                  ) : (
+                    <Link
+                      to={link === 'Stories' ? '/' : `/${link.toLowerCase()}`}
+                      className="hover:text-primary transition-colors font-bold text-sm tracking-wide"
+                    >
+                      {link}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
